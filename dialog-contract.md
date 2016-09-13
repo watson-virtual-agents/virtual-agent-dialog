@@ -482,12 +482,12 @@ To return to the Watson Virtual Agent from a client workspace, insert the follow
 
 Lets take a look at the dialog flow that is included for the 'Make a Payment' intent.  Here is a view of this flow from the Conversation Tooling
 
-![Image of Make a Payment](https://github.ibm.com/watson-industry-apps/industry-backlog/blob/master/images/Payment%20Dialog%20Flow.png)
+![Image of Make a Payment](https://github.com/watson-virtual-agents/virtual-agent-dialog/blob/master/doc-images/Payment%20Dialog%20Flow.png)
 
 
 This is a quite complex flow, that is triggered by an utterance that is determined to be a request to 'Make a Payment', lets look in detail at the first few steps:
 
-![Image of first half](https://github.ibm.com/watson-industry-apps/industry-backlog/blob/master/images/Payment%20first-half.png)
+![Image of first half](https://github.com/watson-virtual-agents/virtual-agent-dialog/blob/master/doc-images/Payment%20first-half.png)
 
 You can see immediately that in the first step we do after recognizing the utterance, is give the user their 'current balance' and 'due date' and then prompt them to make a choice on how they would like to pay:
 
@@ -591,7 +591,7 @@ So lets examine this, we signal that this request is to be handled by the <code>
 
 In this illustration, you can see that the dialog is simply waiting for a "Success" or "Failure" from this widget, because all the relevent data should be processed on the client side
 
-![confirmation widget](https://github.ibm.com/watson-industry-apps/industry-backlog/blob/master/images/credit%20card%20confirmation.png)
+![confirmation widget](https://github.com/watson-virtual-agents/virtual-agent-dialog/blob/master/doc-images/credit%20card%20confirmation.png)
 
 
 The dialog then leads them through whether they would like a receipt, and how that would be delivered. At this point in the dialog we know that the client side indicated that it has gathered all the data needed and they are in the client <code>store</code>, and we have dialoged confirmation from the end user, so now we utilize <code>action</code> to call the client side implemenation for the payment_method to actually perform the transaction:
