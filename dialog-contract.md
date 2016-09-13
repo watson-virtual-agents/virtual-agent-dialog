@@ -1,6 +1,6 @@
 # Watson Virtual Agent Dialog Design #
 
-The Watson Virtual Agent(WVA) Dialog works in concert with the Watson Virtual Agent(WVA) Chat Widget which was built on top of the Watson Virtual Agent(WVA) Client SDK. WVA Dialog communicates via JSON, extending the base IBM Watson Conversation dialog to issue a series of directivies through the WVA Client SDK to the WVA Chat widget with a series of directives that facilitate the more efficient gathering of user data as well as a mechanism to insulate Personally Identifiable Information from the IBM Cloud.
+The Watson Virtual Agent(WVA) Dialog works in concert with the Watson Virtual Agent(WVA) Chat Widget which was built on top of the Watson Virtual Agent(WVA) Client SDK. WVA Dialog communicates via JSON, extending the base IBM Watson Conversation dialog to issue a series of directives which are interpreted by the  WVA Client SDK / Chat widget that facilitate the more efficient gathering of user data as well as a mechanism to insulate Personally Identifiable Information from the IBM Cloud.
 
 ## IBM Dialog Conversation Directives
 ###BOT###
