@@ -1,7 +1,6 @@
-# Documentation
+# Watson Virtual Agent Dialog Design
 
-## How does Watson Virtual Agent Dialog Communicate with channels (including the Chat Widget) to direct operations
-The Client Bot manages communications with a Watson Virtual Agent bot, private variables, and incoming/outgoing message event handling. The Watson Virtual Agent Chat Widget is build on top of the Client Bot SDK and adds a configurable user interface and a set of utilities. Watson Conversation Dialog communicates through the Client BOT SDK to the WVA Chat widget with a series of directives that facilitate the more efficient gathering of user data as well as a mechanism to insulate sensitive information from the IBM Cloud
+## The Watson Virtual Agent(WVA) Dialog works in concert with the Watson Virtual Agent(WVA) Chat Widget which was built on top of the Watson Virtual Agent(WVA) Client SDK. WVA Dialog communicates via JSON, extending the base IBM Watson Conversation dialog to issue a series of directivies through the WVA Client SDK to the WVA Chat widget with a series of directives that facilitate the more efficient gathering of user data as well as a mechanism to insulate Personally Identifiable Information from the IBM Cloud.
 
 ## IBM Dialog Conversation Directives
 ###BOT###
@@ -10,8 +9,6 @@ The Client Bot manages communications with a Watson Virtual Agent bot, private v
 - context variables
 - how to represent configurator options (%uid%)
 - connect to agent
-
-
 
 ###UI###
 - layout (UI widgets)
