@@ -2,7 +2,7 @@
 
 The Watson Virtual Agent(WVA) Dialog works in concert with the Watson Virtual Agent(WVA) Chat Widget which was built on top of the Watson Virtual Agent(WVA) Client SDK. WVA Dialog communicates via JSON, extending the base IBM Watson Conversation dialog to issue a series of directives which are interpreted by the  WVA Client SDK / Chat widget that facilitate the more efficient gathering of user data as well as a mechanism to insulate Personally Identifiable Information from the IBM Cloud.
 
-## IBM Dialog Conversation Directives
+## IBM Virtual Agent Conversation Dialog Directives
 ###BOT###
 - request (call a method to be executed by the bot)
 - output.text as a string, as an array
@@ -58,7 +58,7 @@ The Watson Virtual Agent(WVA) Dialog works in concert with the Watson Virtual Ag
 
 #### Private Variables
 
-Some data items that are necessary to perform some actions or transactions are considered Private Personal Information (PII) (for example last name, SSN, CC number, SSN, etc), and this information needs to remain outside of the IBM Cloud. To facilitate this, Watson Virtual Agent has provided an SDK that should be used to implement channel widgets that can be directed to gather and utilize these data in transcations, but shield it from the IBM DataCenter. From the dialog authoring perspective, there are two key directives to utilize, these are:
+Some data items that are necessary to perform some actions or transactions are considered Private Personal Information (PII) (for example last name, SSN, CC number, SSN, etc), and this information needs to remain outside of the IBM Cloud. To facilitate this, Watson Virtual Agent has provided an SDK that should be used to implement channel widgets that can be directed to gather and utilize these data in transcations, but shield it from the IBM DataCenter. From the dialog authoring perspective, there are three key directives to utilize, these are:
 <dl>
 <dt><a href="#store">store []</a></dt>
 <dd><p>This function serves two purposes: <ol>
@@ -83,8 +83,7 @@ You can achieve this by adding '&' in front of a variable names that are used in
 </dl>
 
 ### Client Workspaces for Watson Virtual Agent###
-<dl>
-<dt><a href="#whattodoclient">Requirements</a></dt>
+#####Requirements
 <dd><p>
 <ul>
 <li>In the initial release, you can only define one client workspace that can be invoked.  This workspace can contain multiple intents.
@@ -95,16 +94,17 @@ You can achieve this by adding '&' in front of a variable names that are used in
 
 </p>
 </dd>
-
-<dt><a href="#returntoMainWorkspace">return from Client Workspace to Watson Virtual Agent </a></dt>
+#####Return to Watson Virtual Agent from Client Workspace
 <dd><p> A dialog directive used in <code>context</code> to return immediately to the main workspace from a client workspace at any step in the dialog</p>
 </dd>
 </dl>
 
-# Directive syntax #
+# Directive details#
 
 ## context
-The context property in the main JSON can be used to store and persist variable values. Context is also the place where requests are made to the bot backend to execute a certain method and then call the channel. *Please do NOT pass an PII around in context as this does persist in the IBM Cloud.*
+The <code>context</code> property in the main JSON can be used to store and persist variable values. Context is also the place where requests are made to the bot backend to execute a certain method and then call the channel. 
+
+*Please do NOT pass an PII around in context as this does persist in the IBM Cloud.*
   
 ### request
 
@@ -607,7 +607,6 @@ The dialog then leads them through whether they would like a receipt, and how th
   }
 }
 ```
-
 
 
 
