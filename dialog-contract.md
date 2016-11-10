@@ -363,7 +363,7 @@ Validation when you want to signal the channel when the expected input must fall
 }
 ```
 
-### Validation using `existIn` or `oneOf`
+### Validation using `someOf` or `oneOf`
 | Param | Type | Description |
 | --- | --- | --- |
 | oneOf| <code>[string]</code> | requires input to be one of a range of values |
