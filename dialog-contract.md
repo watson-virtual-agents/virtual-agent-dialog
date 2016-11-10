@@ -261,7 +261,7 @@ The layout property can be used in the output JSON object to specify the name of
 
 
 ### Rendering layouts with text arrays
-When a dialog node has multiple lines of text along with a layout, an optional `index` property can be used to denote at which position the layout should be rendered.
+When a dialog node has multiple lines of text along with a layout, an optional `index` property can be used to denote at which position the layout should be rendered. For example, to display the layout after the first string of text (array item 0), specify `"index" : "0"`.
 
 **Example - Text array with two statements and a layout**  
 In the following example, the `"index": "0"` property makes sure that the layout is rendered between the two text statements in the array.
@@ -287,15 +287,15 @@ In the following example, the `"index": "0"` property makes sure that the layout
 ```
 
 ### Digging deeper into the `form` layout
-The `form` layout is a flexible widget that can be used anywhere in the dialog when a user input is needed that does not need to be sent back to the dialog. The different fields in the form are constructed using the `store` object as seen in the example below. Each field needs a mandatory `name` and `label` property for it to be displayed on the form widget. Two more optional properties, `required` and `validations` can be used to extend the restrictions on inputs allowed in these fields.
+The `form` layout is a flexible widget that can be used anywhere in the dialog when a user input is needed that does not need to be sent back to the dialog. The different fields in the form are constructed using the `store` object as seen in the example below.
 
 
 | Param | Format | Description |
 | --- | --- | --- |
-| name| String | Variable name for the field used on the Channel|
+| name| String | Variable name that can be used by the application to reference it|
 | label| String | Display name for the field in the form |
-| required | String - "true" or "false" ("false" by default if not assigned) | Denotes if input for field is mandatory |
-| validations | Array with regex and error messages | Conditions used to validate input in the particular field |
+| required | String - "true" or "false" ("false" by default if not assigned) | Specifies whether it is mandatory for a user to fill out the field |
+| validations | Array with regex and error messages | Rules that are used to validate the input provided by a user. Define a regular expression that indicates what values are allowed, and a message to display to users if their input does not meet the regular expression requirements |
 
 **Example - A form layout constructed using Store variables, and uses regexes to validate Zipcodes**  
 ```none
@@ -367,7 +367,7 @@ Validation when you want to signal the channel when the expected input must fall
 | Param | Type | Description |
 | --- | --- | --- |
 | oneOf| <code>[string]</code> | requires input to be one of a range of values |
-| existIn| <code>[string]</code> | requires input to be any of a range of values (*for example a multiple selection textbox, select all that apply*)|
+| someOf| <code>[string]</code> | requires input to be any of a range of values (*for example a multiple selection textbox, select all that apply*)|
 
 **Example - Using oneOf to validate a location layout's response**  
 ```none
@@ -385,6 +385,21 @@ Validation when you want to signal the channel when the expected input must fall
 		}
 	}
 } 
+```
+
+**Example - Using someOf to display a list of options (multiple selections allowed)**  
+```none
+{
+	"output": {
+		"text": "What are your favorite fruits?",
+		"layout": {
+			"name": "choose"
+		},
+		"inputvalidation": {
+			"someOf": ["Apples", "Oranges", "Bananas"]
+		}
+	}
+}
 ```
 
 
