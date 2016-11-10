@@ -226,7 +226,7 @@ The request method named swapConfigurationProperty takes the contents of output.
 
 <a name="layout"></a>
 ## layout
-the layout property can be used in the output JSON object to specify the name of the widget to be displayed
+The layout property can be used in the output JSON object to specify the name of the widget to be displayed
 
 
 | Param | Type | Description |
@@ -238,7 +238,9 @@ the layout property can be used in the output JSON object to specify the name of
 | request-geolocation-zipcode| <code>widget</code> | Requests user to input the desired zipcode |
 | request-geolocation-latlong| <code>widget</code> | Requests user to share current browser or device location |
 
-**Example 1 - Layout to choose a payment option**  
+
+
+**Example - Layout to choose a payment option**  
 ```none
 {
 	"output": {
@@ -257,34 +259,87 @@ the layout property can be used in the output JSON object to specify the name of
 }
 ```
 
-**Example 2 - A form layout constructed using Store variables**  
+
+### Rendering layouts with text arrays
+When a dialog node has multiple lines of text along with a layout, an optional `index` property can be used to denote at which position the layout should be rendered. For example, to display the layout after the first string of text (array item 0), specify `"index" : "0"`.
+
+**Example - Text array with two statements and a layout**  
+In the following example, the `"index": "0"` property makes sure that the layout is rendered between the two text statements in the array.
 ```none
 {
 	"output": {
-		"text": "Please enter your new address",
-		"store": [{
-			"name": "user_street_address1",
-			"label": "Street Address 1"
-		}, {
-			"name": "user_street_address2",
-			"label": "Street Address 2"
-		}, {
-			"name": "user_locality",
-			"label": "Locality/City"
-		}, {
-			"name": "user_state_or_province",
-			"label": "State or Province"
-		}, {
-			"name": "user_zipcode",
-			"label": "Zipcode"
-		}],
+		"text": ["Select your store", "Is there anything else I can help you with?"],
 		"layout": {
-			"name": "form"
+			"name": "show-locations",
+			"index": "0"
+		}
+	},
+	"context": {
+		"request": {
+			"args": {
+				"location": "$user_location",
+				"location-type": "$location_type"
+			},
+			"name": "getStoreList"
 		}
 	}
 }
 ```
 
+### Digging deeper into the `form` layout
+The `form` layout is a flexible widget that can be used anywhere in the dialog when a user input is needed that does not need to be sent back to the dialog. The different fields in the form are constructed using the `store` object as seen in the example below.
+
+
+| Param | Format | Description |
+| --- | --- | --- |
+| name| String | Variable name that can be used by the application to reference it|
+| label| String | Display name for the field in the form |
+| required | String - "true" or "false" ("false" by default if not assigned) | Specifies whether it is mandatory for a user to fill out the field |
+| validations | Array with regex and error messages | Rules that are used to validate the input provided by a user. Define a regular expression that indicates what values are allowed, and a message to display to users if their input does not meet the regular expression requirements |
+
+**Example - A form layout constructed using Store variables, and uses regexes to validate Zipcodes**  
+```none
+{
+  "output": {
+    "text": "Please enter your new address",
+    "store": [
+      {
+        "name": "user_street_address1",
+        "label": "Street Address 1",
+        "required": "true"
+      },
+      {
+        "name": "user_street_address2",
+        "label": "Street Address 2"
+      },
+      {
+        "name": "user_locality",
+        "label": "Locality/City",
+        "required": "true"
+      },
+      {
+        "name": "user_state_or_province",
+        "label": "State or Province",
+        "required": "true"
+      },
+      {
+        "name": "user_zipcode",
+        "label": "Zipcode",
+        "required": "true",
+        "validations": [
+          {
+            "regex": "\\d{5}([ \\-]\\d{4})?|[A-Z]\\d[A-Z] ?\\d[A-Z]\\d",
+            "message": "Please enter a valid zipcode"
+          }
+        ]
+      }
+    ],
+    "layout": {
+      "name": "form"
+    }
+  }
+}
+```
 
 <a name="inputvalidation"></a>
 ## inputvalidation
@@ -312,7 +367,7 @@ Validation when you want to signal the channel when the expected input must fall
 | Param | Type | Description |
 | --- | --- | --- |
 | oneOf| <code>[string]</code> | requires input to be one of a range of values |
-| existIn| <code>[string]</code> | requires input to be any of a range of values (*for example a multiple selection textbox, select all that apply*)|
+| someOf| <code>[string]</code> | requires input to be any of a range of values (*for example a multiple selection textbox, select all that apply*)|
 
 **Example - Using oneOf to validate a location layout's response**  
 ```none
@@ -330,6 +385,21 @@ Validation when you want to signal the channel when the expected input must fall
 		}
 	}
 } 
+```
+
+**Example - Using someOf to display a list of options (multiple selections allowed)**  
+```none
+{
+	"output": {
+		"text": "What are your favorite fruits?",
+		"layout": {
+			"name": "choose"
+		},
+		"inputvalidation": {
+			"someOf": ["Apples", "Oranges", "Bananas"]
+		}
+	}
+}
 ```
 
 
@@ -460,6 +530,19 @@ In this case, the action `getUserProfileVariables` along with the arguments for 
 	}
 }
 ```
+
+Here's a complete list of actions being used as a part of dialog flows in Watson Virtual Agent:
+
+| Action name | Arguments | Description |
+| --- | --- | --- |
+| payBill| payment_method | Method called to complete bill payment transaction |
+| getUserProfileVariables| variables (list of variables as an array) | Method used to retrieve the values of certain variables from the app server |
+| updateAddress| address_type | Method called to complete address update process on the systems of record |
+| updateEmail| email_type | Method called to complete email update process on the systems of record |
+| updatePhoneNumber| phone_number_type | Method called to complete phone number update process on the systems of record |
+| sendPaymentReceipt| receipt_type | Method used to indicate to the app server that the user wants a payment receipt sent to them |
+| agent|  | The UI action for 'Escalate to Agent' |
+
 <a name="returntoMainWorkspace"></a>
 ##Client Workspaces
 
