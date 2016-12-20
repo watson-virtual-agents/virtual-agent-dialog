@@ -233,6 +233,8 @@ The layout property can be used in the output JSON object to specify the name of
 | --- | --- | --- |
 | cc-validator| <code>widget</code> | Credit card widget for Make Payment flow |
 | form| <code>widget</code> | Creates a generic form from the field names in the Store object |
+| choose| <code>widget</code> | Creates a list of buttons from the array of strings labeled as `oneOf` (or `someOf`) in the `inputvalidation` object, the user can choose one of (or some of) the options in the displayed list|
+| confirm| <code>widget</code> | Similar to `choose` layout but used in a situation requiring confirmation, like between 'Yes' or 'No', for example |
 | show-locations | <code>widget</code> | Map widget along with store location data for Find Nearest Store flow |
 | choose-location-type| <code>widget</code> | UI returns what type of location is being returned - outputs: zipcode, latlong |
 | request-geolocation-zipcode| <code>widget</code> | Requests user to input the desired zipcode |
@@ -241,6 +243,7 @@ The layout property can be used in the output JSON object to specify the name of
 
 
 **Example - Layout to choose a payment option**  
+In the following example for a `choose` layout, the chat widget will display two buttons - Credit Card, Direct Transfer. The dialog will then expect one of these strings as response back from the widget. 
 ```none
 {
 	"output": {
@@ -251,8 +254,7 @@ The layout property can be used in the output JSON object to specify the name of
 		"inputvalidation": {
 			"oneOf": [
 				"Credit Card",
-				"Direct Transfer",
-				"Paypal"
+				"Direct Transfer"
 			]
 		}
 	}
