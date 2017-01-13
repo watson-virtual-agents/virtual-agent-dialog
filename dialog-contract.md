@@ -94,9 +94,6 @@ You can achieve this by adding '&' in front of a variable name that is used in a
 
 </p>
 </dd>
-#####Return to Watson Virtual Agent from Client Workspace
-<dd><p> A dialog directive used in <code>context</code> to return immediately to the IBM dialog from a custom dialog</p>
-</dd>
 </dl>
 
 # Directive details#
@@ -299,6 +296,13 @@ The `form` layout is a flexible widget that can be used anywhere in the dialog w
 | required | String - "true" or "false" ("false" by default if not assigned) | Specifies whether it is mandatory for a user to fill out the field |
 | validations | Array with regex and error messages | Rules that are used to validate the input provided by a user. Define a regular expression that indicates what values are allowed, and a message to display to users if their input does not meet the regular expression requirements |
 
+The form layout provides built-in buttons.
+
+| Button label | Value sent from the chat widget when the button is selected |
+| --- | --- |
+|Submit|success|
+|Cancel|cancel|
+
 **Example - A form layout constructed using Store variables, and uses regexes to validate Zipcodes**  
 ```none
 {
@@ -366,10 +370,10 @@ Validation when you want to signal the channel when the expected input must fall
 ```
 
 ### Validation using `someOf` or `oneOf`
-| Param | Type | Description |
-| --- | --- | --- |
-| oneOf| <code>[string]</code> | requires input to be one of a range of values |
-| someOf| <code>[string]</code> | requires input to be any of a range of values (*for example a multiple selection textbox, select all that apply*)|
+| Param | Type | Description | Value sent from the chat widget |
+| --- | --- | --- | --- |
+| oneOf| <code>[string]</code> | Requires input to be one of a range of values. Do not define a value that includes a comma. |The value that the user selected. |
+| someOf| <code>[string]</code> | Requires input to be any of a range of values (*for example a multiple selection textbox, select all that apply*).|A comma-separated list of the values that the user selected. |
 
 **Example - Using oneOf to validate a location layout's response**  
 ```none
@@ -546,17 +550,6 @@ Here's a complete list of actions being used as a part of dialog flows in Watson
 | agent|  | The UI action for 'Escalate to Agent' |
 
 <a name="returntoMainWorkspace"></a>
-##Client Workspaces
-
-### return to Watson Virtual Agent from Client Workspace
-To return to the Watson Virtual Agent IBM dialog from a custom dialog, insert the following into <code>context</code>
-
-| Param | Type | Description |
-| --- | --- | --- |
-| system.dialog_stack | <code>system.dialog_stack[0] == root</code> | Returns from a custom dialog to Watson Virtual Agent |
-
-
-
 
 ##Examples##
 
