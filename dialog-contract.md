@@ -184,7 +184,7 @@ The construct skip_user_input is used as a request when we do not require a dial
 *This addition was made to the contract to fix an issue where, in some cases where there was an intent switch mid-flow, the dialog was going back to IBM content despite that particular intent being turned off/set to a text message.*
 The flag `dialog_in_progress` indicates to the bot that a dialog flow is currently in progress, and handles the case where the user enters an utterance that maps to another intent. This additional check takes care of looking up the virtual agent's configuration and route the dialog according to where the new intent is mapped to, rather than going to the IBM content for that intent by default. 
 
-To support this functionality is your custom workspace, three steps need to be followed:
+To support this functionality in your custom workspace, three steps need to be followed:
 
 - Step 1: Set a context variable `"dialog_in_progress": true` in all the root level nodes with an intent condition
 ```none
@@ -207,7 +207,9 @@ To support this functionality is your custom workspace, three steps need to be f
   "output": {}
 }
 ```
-Step 1 and Step 2 above ensure that the value of dialog_in_progress is set to true everytime the user enters a new flow, and a new flow can be entered only after the dialog_in_progress has been set to false (in case the intent switching happened mid-flow). The final step ties it together by being the only condition the dialog enters when a new intent utterance is entered while in another flow. Here, the value of dialog_in_progress is set to false and this information is sent back to the bot, which checks for the right place for the new intent's response. If it is set to IBM content, the bot resends the intent info to the dialog workspace and goes through its pre-built flow. If it is set to disabled, text response, or a custom workspace, it will execute those responses accordingly.
+Step 1 and Step 2 above ensure that the value of dialog_in_progress is set to true everytime the user enters a new flow, and a new flow can be entered only after the dialog_in_progress has been set to false (in case the intent switching happened mid-flow). Step 3 ties it together by being the only condition the dialog enters when a new intent utterance is entered while in another flow. Here, the value of dialog_in_progress is set to false and this information is sent back to the bot, which checks for the right place for the new intent's response. If it is set to IBM content, the bot resends the intent info to the dialog workspace and goes through its pre-built flow. If it is set to disabled, text response, or a custom workspace, it will execute those responses accordingly.
+
+If this is not the case (no intent switching mid-flow), the bot resets the value of dialog_in_progress to false whenever `root` is detected in the conversation response, which indicates that the dialog flow has ended. 
 
 Here's a snapshot of a workspace that implements the dialog_in_progress flag.
 ![Snapshot of a workspace with dialog_in_progress](https://github.com/watson-virtual-agents/virtual-agent-dialog/blob/master/doc-images/dialog_in_progress.png)
