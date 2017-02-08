@@ -7,6 +7,8 @@ The Watson Virtual Agent (WVA) dialog works in concert with the Watson Virtual A
 - request (call a method to be executed by the bot)
 - output.text as a string, as an array
 - context variables
+- skip_user_input
+- dialog_in_progress
 - how to represent configurator options (%uid%)
 - connect to agent
 
@@ -163,7 +165,7 @@ Variable values can be persisted in the context section of the response. Once pe
 In the above example, a previously saved context variable named _address_type_'s value is being assigned as an action argument. To do this, we simply use the dialog shorthand for a context variable's value: adding a $ before its name.
 
 ### skip_user_input
-The construct skip_user_input is used when we do not require a dialog turn to go to the channel. This is useful when we want the bot to execute a request and then come back to dialog instead of going to the UI. 
+The construct skip_user_input is used as a request when we do not require a dialog turn to go to the channel. This is useful when we want the bot to execute a request, set a variable value, or carry out some other task on the bot and then come back to dialog instead of going to the UI. 
 
 **Example**  
 ```none
@@ -171,12 +173,45 @@ The construct skip_user_input is used when we do not require a dialog turn to go
 	"output": {},
 	"context": {
 		"request": {
-			"name": "getValue"
+			"name": "skip_user_input"
 		},
-		"skip_user_input": true
+		"dialog_in_progress": false
 	}
 }
 ```
+
+### dialog_in_progress
+*This addition was made to the contract to fix an issue where, in some cases where there was an intent switch mid-flow, the dialog was going back to IBM content despite that particular intent being turned off/set to a text message.*
+The flag `dialog_in_progress` indicates to the bot that a dialog flow is currently in progress, and handles the case where the user enters an utterance that maps to another intent. This additional check takes care of looking up the virtual agent's configuration and route the dialog according to where the new intent is mapped to, rather than going to the IBM content for that intent by default. 
+
+To support this functionality is your custom workspace, three steps need to be followed:
+1. Set a context variable `"dialog_in_progress": true` in all the root level nodes with an intent condition
+
+```none
+{
+  "context": {
+    "dialog_in_progress": true
+  }
+}
+```
+2. Add a condition `$dialog_in_progress == false` or `context.dialog_in_progress == false` to all root level nodes with an intent condition (all nodes where the context variable was set in Step 1)
+3. Add a root node above all the other nodes with the condition `$dialog_in_progress == true` or `context.dialog_in_progress == true` and the following content
+```none
+{
+  "context": {
+    "request": {
+      "name": "skip_user_input"
+    },
+    "dialog_in_progress": false
+  },
+  "output": {}
+}
+```
+Step 1 and Step 2 above ensure that the value of dialog_in_progress is set to true everytime the user enters a new flow, and a new flow can be entered only after the dialog_in_progress has been set to false (in case the intent switching happened mid-flow). The final step ties it together by being the only condition the dialog enters when a new intent utterance is entered while in another flow. Here, the value of dialog_in_progress is set to false and this information is sent back to the bot, which checks for the right place for the new intent's response. If it is set to IBM content, the bot resends the intent info to the dialog workspace and goes through its pre-built flow. If it is set to disabled, text response, or a custom workspace, it will execute those responses accordingly.
+
+Here's a snapshot of a workspace that implements the dialog_in_progress flag.
+![Snapshot of a workspace with dialog_in_progress](https://github.com/watson-virtual-agents/virtual-agent-dialog/blob/master/doc-images/dialog_in_progress.png)
+
 
 <a name="output"></a>
 ## output
