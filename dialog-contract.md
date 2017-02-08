@@ -185,8 +185,8 @@ The construct skip_user_input is used as a request when we do not require a dial
 The flag `dialog_in_progress` indicates to the bot that a dialog flow is currently in progress, and handles the case where the user enters an utterance that maps to another intent. This additional check takes care of looking up the virtual agent's configuration and route the dialog according to where the new intent is mapped to, rather than going to the IBM content for that intent by default. 
 
 To support this functionality is your custom workspace, three steps need to be followed:
-1. Set a context variable `"dialog_in_progress": true` in all the root level nodes with an intent condition
 
+- Step 1: Set a context variable `"dialog_in_progress": true` in all the root level nodes with an intent condition
 ```none
 {
   "context": {
@@ -194,8 +194,8 @@ To support this functionality is your custom workspace, three steps need to be f
   }
 }
 ```
-2. Add a condition `$dialog_in_progress == false` or `context.dialog_in_progress == false` to all root level nodes with an intent condition (all nodes where the context variable was set in Step 1)
-3. Add a root node above all the other nodes with the condition `$dialog_in_progress == true` or `context.dialog_in_progress == true` and the following content
+- Step 2: Add a condition `$dialog_in_progress == false` or `context.dialog_in_progress == false` to all root level nodes with an intent condition (all nodes where the context variable was set in Step 1)
+- Step 3: Add a root node above all the other nodes with the condition `$dialog_in_progress == true` or `context.dialog_in_progress == true` and the following content
 ```none
 {
   "context": {
