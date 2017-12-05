@@ -1,1 +1,2311 @@
-{"updated": "2017-09-22T14:23:130Z", "workspace_id": "2d85cd87-51f1-4888-bcf7-46493698b364", "dialog_nodes": [{"updated": "2017-09-22T14:23:130Z", "description": null, "parent": null, "created": "2017-09-22T14:23:130Z", "dialog_node": "conversation_start_telco_es", "previous_sibling": null, "context": null, "output": {"text": "Hola, mi nombre es %agent_name%. %greeting_message%"}, "go_to": null, "conditions": "conversation_start", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": null, "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_2_1470928876329", "previous_sibling": "conversation_start_telco_es", "context": {"email_input_counter": 0}, "output": {"text": {"values": ["\u00bfQu\u00e9 direcci\u00f3n de correo electr\u00f3nico desea cambiar?"]}, "inputvalidation": {"oneOf": ["Notificaciones de perfil", "Notificaciones de cuenta", "Notificaciones de seguridad/uso", "Notificaciones de facturaci\u00f3n electr\u00f3nica", "Todas las notificaciones"]}, "layout": {"name": "choose"}, "node_position": "root"}, "conditions": "#Account_Management-Email_Change  ", "metadata": null}, {"next_step": {"dialog_node": "node_7_1471536802114", "behavior": "jump_to", "selector": "body"}, "updated": "2017-06-22T05:53:43.288000", "description": null, "parent": "node_2_1470928876329", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_2_1471535980478", "previous_sibling": null, "context": {"email_type": "<? input.text ?>"}, "output": {}, "conditions": "@emailType", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_2_1471535980478", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_7_1471536802114", "previous_sibling": null, "context": null, "output": {"text": "Seleccion\u00f3 $email_type. \u00bfQu\u00e9 direcci\u00f3n de correo electr\u00f3nico desea utilizar?", "layout": {"name": "form"}, "store": [{"required": "true", "name": "user_email_address", "label": "Indique la nueva direcci\u00f3n de correo electr\u00f3nico"}]}, "conditions": "true", "metadata": null}, {"next_step": {"dialog_node": "node_11_1471537462556", "behavior": "jump_to", "selector": "condition"}, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_7_1471536802114", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_9_1471537179473", "previous_sibling": "node_8_1471537170271", "context": null, "output": {}, "conditions": "@negative:Failure", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_7_1471536802114", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_8_1471537170271", "previous_sibling": null, "context": null, "output": {"action": {"args": {"email_type": "$email_type"}, "name": "updateEmail"}}, "conditions": "@affirmative:Success", "metadata": null}, {"next_step": null, "updated": "2017-07-12T21:08:43.458000", "description": null, "parent": "node_7_1471536802114", "created": "2017-07-12T21:08:35.590000", "title": null, "dialog_node": "node_3_1499893723416", "previous_sibling": "node_9_1471537179473", "context": null, "output": {"text": {"values": ["Su solicitud se ha cancelado. Gracias por dirigirse a nosotros. \u00bfEn qu\u00e9 m\u00e1s puedo ayudarle?"], "selection_policy": "sequential"}}, "conditions": "@negative:Cancel", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_9_1471537179473", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_12_1471537474123", "previous_sibling": "node_11_1471537462556", "context": {"request": {"name": "escalateToAgent"}}, "output": {"action": {"name": "agent"}, "text": "Lo siento. Puedo pasarle con un agente para que le ayude a actualizar su correo electr\u00f3nico $email_type."}, "conditions": "$email_input_counter == 1", "metadata": null}, {"next_step": {"dialog_node": "node_7_1471536802114", "behavior": "jump_to", "selector": "body"}, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_9_1471537179473", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_11_1471537462556", "previous_sibling": null, "context": {"email_input_counter": 1}, "output": {"text": {"values": ["Lo siento, pero esta direcci\u00f3n de correo electr\u00f3nico parece no ser v\u00e1lida. Por favor, int\u00e9ntelo de nuevo."]}, "layout": {"repopulate": true}}, "conditions": "$email_input_counter == 0", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_8_1471537170271", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_10_1471537394095", "previous_sibling": null, "context": null, "output": {"text": ["Su direcci\u00f3n de correo electr\u00f3nico se ha actualizado a |&user_email_address|.", "\u00bfPuedo ayudarle en algo m\u00e1s?"], "variables": "true"}, "conditions": "@affirmative:Success", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": null, "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_4_1470844889583", "previous_sibling": "node_2_1470928876329", "context": {"address_input_counter": 0}, "output": {"text": {"values": ["\u00bfQu\u00e9 direcci\u00f3n desea actualizar?"]}, "inputvalidation": {"oneOf": ["Facturaci\u00f3n", "Correo"]}, "layout": {"name": "choose"}, "node_position": "root"}, "conditions": "#Account_Management-Update_Change_Address  ", "metadata": null}, {"next_step": {"dialog_node": "node_1_1471443473959", "behavior": "jump_to", "selector": "body"}, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_4_1470844889583", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_8_1471362769868", "previous_sibling": null, "context": {"address_type": "<? input.text ?>"}, "output": {}, "conditions": "@addressType", "metadata": null}, {"next_step": null, "updated": "2017-07-12T21:07:30.370000", "description": null, "parent": "node_8_1471362769868", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_1_1471443473959", "previous_sibling": null, "context": null, "output": {"text": {"values": ["Indique su nueva direcci\u00f3n"]}, "layout": {"name": "form"}, "store": [{"required": "true", "name": "user_street_address1", "label": "Direcci\u00f3n postal 1"}, {"name": "user_street_address2", "label": "Direcci\u00f3n postal 2"}, {"required": "true", "name": "user_locality", "label": "Localidad/ciudad"}, {"required": "true", "name": "user_state_or_province", "label": "Estado o provincia"}, {"required": "true", "name": "user_zipcode", "label": "C\u00f3digo postal"}]}, "conditions": "true", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_1_1471443473959", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_6_1471443663472", "previous_sibling": "node_2_1471443542657", "context": null, "output": {"text": "Lo sentimos, se ha producido un error al procesar esta direcci\u00f3n. \u00bfEn qu\u00e9 m\u00e1s puedo ayudarle?"}, "conditions": "@negative:Failure", "metadata": null}, {"next_step": null, "updated": "2017-07-12T21:07:38.198000", "description": null, "parent": "node_1_1471443473959", "created": "2017-07-12T21:07:26.630000", "title": null, "dialog_node": "node_1_1499893654339", "previous_sibling": "node_6_1471443663472", "context": null, "output": {"text": {"values": ["Su solicitud se ha cancelado. Gracias por dirigirse a nosotros. \u00bfEn qu\u00e9 m\u00e1s puedo ayudarle?"], "selection_policy": "sequential"}}, "conditions": "@negative:Cancel", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_1_1471443473959", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_2_1471443542657", "previous_sibling": null, "context": null, "output": {"text": ["\u00bfEs correcta la informaci\u00f3n que ha especificado?", "|&user_street_address1|", "|&user_street_address2|", "|&user_locality|, |&user_state_or_province| |&user_zipcode|"], "inputvalidation": {"oneOf": ["S\u00ed", "No"]}, "layout": {"name": "confirm"}, "variables": "true"}, "conditions": "@affirmative:Success", "metadata": null}, {"next_step": {"dialog_node": "node_1_1471445215649", "behavior": "jump_to", "selector": "condition"}, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_2_1471443542657", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_4_1471443583168", "previous_sibling": "node_3_1471443577233", "context": null, "output": {}, "conditions": "@negative:No", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_2_1471443542657", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_3_1471443577233", "previous_sibling": null, "context": null, "output": {"action": {"args": {"address_type": "$address_type"}, "name": "updateAddress"}}, "conditions": "@affirmative:Yes", "metadata": null}, {"next_step": {"dialog_node": "node_1_1471443473959", "behavior": "jump_to", "selector": "body"}, "updated": "2017-06-22T05:53:30.828000", "description": null, "parent": "node_4_1471443583168", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_1_1471445215649", "previous_sibling": null, "context": {"address_input_counter": 1}, "output": {"layout": {"repopulate": true}}, "conditions": "$address_input_counter == 0", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_4_1471443583168", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_2_1471445320802", "previous_sibling": "node_1_1471445215649", "context": {"request": {"name": "escalateToAgent"}}, "output": {"action": {"name": "agent"}, "text": "Lo siento. Puedo pasarle con un agente para que le ayude a actualizar su direcci\u00f3n $address_type."}, "conditions": "$address_input_counter == 1", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_3_1471443577233", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_5_1471443635934", "previous_sibling": null, "context": null, "output": {"text": "Su direcci\u00f3n se ha actualizado. \u00bfEn qu\u00e9 m\u00e1s puedo ayudarle?"}, "conditions": "@affirmative:Success", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": null, "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_5_1470844895930", "previous_sibling": "node_4_1470844889583", "context": {"phone_number_input_counter": 0}, "output": {"text": {"values": ["\u00bfEst\u00e1 a\u00f1adiendo un n\u00famero de contacto nuevo o est\u00e1 sustituyendo un n\u00famero existente?"]}, "inputvalidation": {"oneOf": ["Nuevo n\u00famero", "N\u00famero de sustituci\u00f3n"]}, "layout": {"name": "choose"}, "node_position": "root"}, "conditions": "#Account_Management-Update_Change_Contact_Phone_Number  ", "metadata": null}, {"next_step": null, "updated": "2017-06-22T05:53:56.973000", "description": null, "parent": "node_5_1470844895930", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_6_1471450167841", "previous_sibling": null, "context": null, "output": {"text": {"values": ["\u00bfDesea que este n\u00famero sea su n\u00famero de contacto primario o secundario?"]}, "inputvalidation": {"oneOf": ["N\u00famero principal", "N\u00famero secundario"]}, "layout": {"name": "choose"}}, "conditions": "@phoneNumberType:new", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_5_1470844895930", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_7_1471450181921", "previous_sibling": "node_6_1471450167841", "context": {}, "output": {"text": {"values": ["\u00bfQu\u00e9 n\u00famero de tel\u00e9fono?"]}, "inputvalidation": {"oneOf": ["N\u00famero principal", "N\u00famero secundario"]}, "layout": {"name": "choose"}}, "conditions": "@phoneNumberType:replacing", "metadata": null}, {"next_step": {"dialog_node": "node_17_1471460652194", "behavior": "jump_to", "selector": "body"}, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_6_1471450167841", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_16_1471460506727", "previous_sibling": null, "context": {"phone_number_type": "<? input.text ?>"}, "output": {}, "conditions": "@phoneNumberType:primary || @phoneNumberType:secondary", "metadata": null}, {"next_step": {"dialog_node": "node_10_1471459819238", "behavior": "jump_to", "selector": "body"}, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_7_1471450181921", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_9_1471459507985", "previous_sibling": null, "context": {"phone_number_type": "<? input.text ?>"}, "output": {}, "conditions": "@phoneNumberType:primary || @phoneNumberType:secondary", "metadata": null}, {"next_step": {"dialog_node": "node_11_1471459850072", "behavior": "jump_to", "selector": "user_input"}, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_16_1471460506727", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_17_1471460652194", "previous_sibling": null, "context": null, "output": {"text": {"values": ["Escriba el n\u00ba de tel\u00e9fono que desea utilizar"]}, "layout": {"name": "form"}, "store": [{"required": "true", "name": "user_phone_number", "label": "Escriba el n\u00famero nuevo"}]}, "conditions": "true", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_9_1471459507985", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_10_1471459819238", "previous_sibling": null, "context": null, "output": {"text": {"values": ["\u00bfA qu\u00e9 n\u00famero le gustar\u00eda cambiar?"]}, "layout": {"name": "form"}, "store": [{"required": "true", "name": "user_phone_number", "label": "Escriba el n\u00famero nuevo"}]}, "conditions": "true", "metadata": null}, {"next_step": {"dialog_node": "node_13_1471459894124", "behavior": "jump_to", "selector": "condition"}, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_10_1471459819238", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_12_1471459865961", "previous_sibling": "node_11_1471459850072", "context": null, "output": {}, "conditions": "@negative:Failure", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_10_1471459819238", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_11_1471459850072", "previous_sibling": null, "context": null, "output": {"action": {"args": {"phone_number_type": "$phone_number_type"}, "name": "updatePhoneNumber"}}, "conditions": "@affirmative:Success", "metadata": null}, {"next_step": null, "updated": "2017-07-12T21:08:15.768000", "description": null, "parent": "node_10_1471459819238", "created": "2017-07-12T21:08:01.901000", "title": null, "dialog_node": "node_2_1499893689706", "previous_sibling": "node_12_1471459865961", "context": null, "output": {"text": {"values": ["Su solicitud se ha cancelado. Gracias por dirigirse a nosotros. \u00bfEn qu\u00e9 m\u00e1s puedo ayudarle?"], "selection_policy": "sequential"}}, "conditions": "@negative:Cancel", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_12_1471459865961", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_14_1471459912216", "previous_sibling": "node_13_1471459894124", "context": {"request": {"name": "escalateToAgent"}}, "output": {"action": {"name": "agent"}, "text": "Lo siento. Puedo pasarle con un agente para que le ayude a actualizar su n\u00famero $phone_number_type."}, "conditions": "$phone_number_input_counter == 1", "metadata": null}, {"next_step": {"dialog_node": "node_10_1471459819238", "behavior": "jump_to", "selector": "body"}, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_12_1471459865961", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_13_1471459894124", "previous_sibling": null, "context": {"phone_number_input_counter": 1}, "output": {"text": {"values": ["Lo siento, este n\u00famero de tel\u00e9fono no es v\u00e1lido. Por favor, int\u00e9ntelo de nuevo."]}, "layout": {"repopulate": true}}, "conditions": "$phone_number_input_counter == 0", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_11_1471459850072", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_15_1471459970243", "previous_sibling": null, "context": null, "output": {"text": ["Su n\u00ba de tel\u00e9fono se ha actualizado a |&user_phone_number|.", "\u00bfEn qu\u00e9 m\u00e1s puedo ayudarle?"], "variables": "true"}, "conditions": "@affirmative:Success", "metadata": null}, {"next_step": null, "updated": "2017-06-29T05:16:17.228000", "description": null, "parent": null, "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_13_1470876887599", "previous_sibling": "node_5_1470844895930", "context": {"request": {"name": "escalateToAgent"}}, "output": {"action": {"name": "agent"}, "text": {"values": ["Por supuesto, puedo ponerle en contacto con uno de nuestros agentes."]}, "node_position": "root"}, "conditions": "#Help-Connect_to_Agent  ", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": null, "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_16_1470877005528", "previous_sibling": "node_13_1470876887599", "context": null, "output": {"text": {"values": ["Antes de buscar una tienda, por favor, elija c\u00f3mo le gustar\u00eda proporcionar su ubicaci\u00f3n."]}, "inputvalidation": {"oneOf": ["C\u00f3digo postal", "Ubicaci\u00f3n actual"]}, "layout": {"latlongIdx": 1, "name": "choose-location-type"}, "node_position": "root"}, "conditions": "#Information-Find_Nearest_Store  ", "metadata": null}, {"next_step": null, "updated": "2017-06-22T04:39:11.147000", "description": null, "parent": "node_16_1470877005528", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_41_1470880607742", "previous_sibling": null, "context": {"location_type": "zipcode"}, "output": {"text": {"values": ["\u00a1Fant\u00e1stico!, vamos a encontrar las tiendas m\u00e1s cercanas. Indique su c\u00f3digo postal para que podamos continuar."]}, "inputvalidation": {"typeOf": "zipcode"}, "layout": {"name": "request-geolocation-zipcode"}}, "conditions": "@locationType:zipcode", "metadata": null}, {"next_step": null, "updated": "2017-06-22T04:39:25.348000", "description": null, "parent": "node_16_1470877005528", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_42_1470880617082", "previous_sibling": "node_41_1470880607742", "context": {"location_type": "latlong"}, "output": {"text": {"values": ["\u00a1Fant\u00e1stico!, vamos a encontrar las tiendas m\u00e1s cercanas. El sitio solicita acceso a su ubicaci\u00f3n. Permita o bloquee esta acci\u00f3n para que podamos continuar."]}, "inputvalidation": {"typeOf": "latlong"}, "layout": {"name": "request-geolocation-latlong"}}, "conditions": "@locationType:latlong", "metadata": null}, {"next_step": {"dialog_node": "node_1_1473203398776", "behavior": "jump_to", "selector": "body"}, "updated": "2017-06-22T04:30:40.906000", "description": null, "parent": "node_41_1470880607742", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_44_1470880674112", "previous_sibling": null, "context": {"user_location": "<? input.text ?>"}, "output": {}, "conditions": "true", "metadata": null}, {"next_step": {"dialog_node": "node_2_1474068005548", "behavior": "jump_to", "selector": "body"}, "updated": "2017-06-22T04:45:28.359000", "description": null, "parent": "node_42_1470880617082", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_6_1473785203250", "previous_sibling": null, "context": {"user_location": "<? input.text ?>"}, "output": {}, "conditions": "input.text.matches(\"^(\\-?\\d+(\\.\\d+)?),\\s*(\\-?\\d+(\\.\\d+)?)$\")", "metadata": null}, {"next_step": {"dialog_node": "node_41_1470880607742", "behavior": "jump_to", "selector": "user_input"}, "updated": "2017-06-22T06:06:55.259000", "description": null, "parent": "node_42_1470880617082", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_1_1497982548597", "previous_sibling": "node_6_1473785203250", "context": null, "output": {"text": {"values": ["Elija c\u00f3mo le gustar\u00eda proporcionar su ubicaci\u00f3n."]}, "inputvalidation": {"oneOf": ["C\u00f3digo postal", "Ubicaci\u00f3n actual"]}, "layout": {"latlongIdx": 1, "name": "choose-location-type"}}, "conditions": "@negative:Failure", "metadata": null}, {"next_step": {"dialog_node": "node_8_1498105732612", "behavior": "jump_to", "selector": "body"}, "updated": "2017-06-22T04:30:22.696000", "description": null, "parent": "node_44_1470880674112", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_1_1473203398776", "previous_sibling": null, "context": {"request": {"args": {"location": "$user_location", "location-type": "$location_type"}, "name": "getStoreList"}}, "output": {"text": {"values": ["Seleccione su tienda"]}, "layout": {"index": "0", "name": "show-locations"}}, "conditions": "true", "metadata": null}, {"next_step": {"dialog_node": "node_3_1474068014471", "behavior": "jump_to", "selector": "body"}, "updated": "2017-06-22T04:45:12.512000", "description": null, "parent": "node_6_1473785203250", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_2_1474068005548", "previous_sibling": null, "context": {"request": {"args": {"location": "$user_location", "location-type": "$location_type"}, "name": "getStoreList"}}, "output": {"text": {"values": ["Seleccione su tienda"]}, "layout": {"index": "0", "name": "show-locations"}}, "conditions": "true", "metadata": null}, {"next_step": null, "updated": "2017-06-22T04:30:07.556000", "description": null, "parent": "node_1_1473203398776", "created": "2017-06-22T04:28:51.026000", "title": null, "dialog_node": "node_8_1498105732612", "previous_sibling": null, "context": null, "output": {"text": {"values": ["\u00bfEn qu\u00e9 m\u00e1s puedo ayudarle?"], "selection_policy": "sequential"}}, "conditions": "true", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_2_1474068005548", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_3_1474068014471", "previous_sibling": null, "context": null, "output": {"text": "\u00bfHay alguna cosa m\u00e1s en la que pueda ayudarle?"}, "conditions": "true", "metadata": null}, {"next_step": {"dialog_node": "node_16_1470877005528", "behavior": "jump_to", "selector": "body"}, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": null, "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_20_1470877179962", "previous_sibling": "node_16_1470877005528", "context": null, "output": {"text": {"values": ["Por supuesto, puedo ayudarle a encontrar el horario de la tienda. Primero vamos a localizar las tiendas cercanas."]}}, "conditions": "#Information-Store_Hours  ", "metadata": null}, {"next_step": {"dialog_node": "node_16_1470877005528", "behavior": "jump_to", "selector": "body"}, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": null, "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_21_1470877182242", "previous_sibling": "node_20_1470877179962", "context": null, "output": {}, "conditions": "#Information-Store_Location  ", "metadata": null}, {"next_step": {"dialog_node": "node_16_1470877005528", "behavior": "jump_to", "selector": "body"}, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": null, "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_22_1470877185121", "previous_sibling": "node_21_1470877182242", "context": null, "output": {"text": {"values": ["Por supuesto, puedo ayudarle a encontrar el n\u00famero de tel\u00e9fono de la tienda. Primero vamos a localizar las tiendas cercanas."]}}, "conditions": "#Information-Store_Phone_Number  ", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": null, "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_27_1470877294668", "previous_sibling": "node_22_1470877185121", "context": null, "output": {"action": {"args": {"variables": ["bill_amount", "payment_due_date"]}, "name": "getUserProfileVariables"}, "text": {"values": ["Accediendo a la informaci\u00f3n de su cuenta..."]}, "node_position": "root"}, "conditions": "#Payment-Make_A_Payment  ", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_27_1470877294668", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_11_1473794714118", "previous_sibling": null, "context": null, "output": {"text": {"values": ["El saldo de su cuenta \\$|&bill_amount| vence el |&payment_due_date|. \u00bfQu\u00e9 le gustar\u00eda hacer? (Pronto habr\u00e1 m\u00e1s opciones)"]}, "inputvalidation": {"oneOf": ["Pagar ahora"]}, "layout": {"name": "choose"}, "variables": "true"}, "conditions": "@affirmative:Success", "metadata": null}, {"next_step": {"dialog_node": "node_11_1473794714118", "behavior": "jump_to", "selector": "body"}, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_11_1473794714118", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_51_1470888011033", "previous_sibling": "node_50_1470887991668", "context": null, "output": {"text": {"values": ["El pago m\u00ednimo que puede realizar es de \\$10."]}}, "conditions": "@paymentQuestion:minimum", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_11_1473794714118", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_49_1470887982532", "previous_sibling": "node_48_1470887962383", "context": null, "output": {"text": {"values": ["Todav\u00eda no damos soporte al pago autom\u00e1tico. Por favor, int\u00e9ntelo m\u00e1s adelante. \u00bfEn qu\u00e9 m\u00e1s puedo ayudarle?"]}}, "conditions": "@paymentType:autopay", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_11_1473794714118", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_50_1470887991668", "previous_sibling": "node_49_1470887982532", "context": null, "output": {"text": {"values": ["Todav\u00eda no damos soporte a los pagos aplazados. Por favor, int\u00e9ntelo m\u00e1s adelante. \u00bfEn qu\u00e9 m\u00e1s puedo ayudarle?"]}}, "conditions": "@paymentType:defer", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_11_1473794714118", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_48_1470887962383", "previous_sibling": "node_47_1470887918931", "context": null, "output": {"text": {"values": ["Todav\u00eda no damos soporte a los pagos a plazos. Por favor, int\u00e9ntelo m\u00e1s adelante. \u00bfEn qu\u00e9 m\u00e1s puedo ayudarle?"]}}, "conditions": "@paymentType:installment", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_11_1473794714118", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_47_1470887918931", "previous_sibling": null, "context": null, "output": {"text": {"values": ["\u00bfC\u00f3mo le gustar\u00eda pagar? (Pronto habr\u00e1 m\u00e1s opciones)"]}, "inputvalidation": {"oneOf": ["Tarjeta de cr\u00e9dito"]}, "layout": {"name": "choose"}}, "conditions": "@paymentType:now", "metadata": null}, {"next_step": {"dialog_node": "node_47_1470887918931", "behavior": "jump_to", "selector": "body"}, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_47_1470887918931", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_1_1470889354198", "previous_sibling": "node_54_1470888108729", "context": null, "output": {"text": {"values": ["El pago m\u00ednimo que puede realizar es de \\$10."]}}, "conditions": "@paymentQuestion:minimum", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_47_1470887918931", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_53_1470888094828", "previous_sibling": "node_1_1495490042817", "context": null, "output": {"text": {"values": ["Todav\u00eda no damos soporte a los pagos por transferencia bancaria. Int\u00e9ntelo de nuevo m\u00e1s adelante. \u00bfEn qu\u00e9 m\u00e1s puedo ayudarle?"]}}, "conditions": "@paymentMethod:direct_transfer", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_47_1470887918931", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_54_1470888108729", "previous_sibling": "node_53_1470888094828", "context": null, "output": {"text": {"values": ["Todav\u00eda no damos soporte a los pagos por Paypal. Int\u00e9ntelo de nuevo m\u00e1s adelante. \u00bfEn qu\u00e9 m\u00e1s puedo ayudarle?"]}}, "conditions": "@paymentMethod:paypal", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_47_1470887918931", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_1_1495490042817", "previous_sibling": null, "context": {"request": {"name": "getPaymentMethods"}}, "output": {"text": {"values": ["Por favor, pague utilizando su tarjeta"]}, "layout": {"name": "cc-validator"}, "store": [{"name": "cc_full_name", "label": "Nombre que figura en la tarjeta"}, {"name": "cc_number", "label": "N\u00famero de la tarjeta de cr\u00e9dito"}, {"name": "cc_exp_date", "label": "Fecha de caducidad"}, {"name": "cc_code", "label": "C\u00f3digo de seguridad"}]}, "conditions": "@paymentMethod:credit_card", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_1_1495490042817", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_56_1470888201581", "previous_sibling": "node_55_1470888191473", "context": null, "output": {"text": "Se ha producido un error al procesar los detalles de su tarjeta de cr\u00e9dito. \u00bfEn qu\u00e9 m\u00e1s puedo ayudarle?"}, "conditions": "@negative:Failure", "metadata": null}, {"next_step": null, "updated": "2017-07-12T21:09:37.702000", "description": null, "parent": "node_1_1495490042817", "created": "2017-06-28T19:26:41.242000", "title": null, "dialog_node": "node_1_1498678003455", "previous_sibling": "node_56_1470888201581", "context": null, "output": {"text": {"values": ["Su solicitud se ha cancelado. Gracias por dirigirse a nosotros. \u00bfEn qu\u00e9 m\u00e1s puedo ayudarle?"], "selection_policy": "sequential"}}, "conditions": "@negative:Cancel", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_1_1495490042817", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_55_1470888191473", "previous_sibling": null, "context": null, "output": {"text": {"values": ["Pagar\u00e1 \\$|&bill_amount| utilizando su tarjeta XXXXXXXXXXXX|&cc_last_four_digits|."]}, "inputvalidation": {"oneOf": ["S\u00ed", "No"]}, "layout": {"name": "confirm"}, "variables": "true"}, "conditions": "@affirmative:Success", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_55_1470888191473", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_58_1470888307093", "previous_sibling": "node_2_1484873440747", "context": null, "output": {"text": "\u00bfEn qu\u00e9 m\u00e1s puedo ayudarle?"}, "conditions": "@negative:No", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_55_1470888191473", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_2_1484873440747", "previous_sibling": null, "context": null, "output": {"action": {"args": {"payment_method": "$payment_method"}, "name": "payBill"}, "text": {"values": ["Procesando su pago..."]}}, "conditions": "@affirmative:Yes", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_2_1484873440747", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_4_1484873501713", "previous_sibling": "node_3_1484873466720", "context": null, "output": {"text": {"values": ["Se ha producido un error al procesar su pago. Por favor, int\u00e9ntelo de nuevo."], "selection_policy": "sequential"}}, "conditions": "@negative:Failure", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_2_1484873440747", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_3_1484873466720", "previous_sibling": null, "context": null, "output": {"text": {"values": ["Se ha procesado el pago. \u00a1Gracias por realizar el pago! \u00bfDesea un recibo para esta transacci\u00f3n?"]}, "inputvalidation": {"oneOf": ["S\u00ed", "No"]}, "layout": {"name": "confirm"}}, "conditions": "@affirmative:Success", "metadata": null}, {"next_step": {"dialog_node": "node_10_1484873705284", "behavior": "jump_to", "selector": "body"}, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_3_1484873466720", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_6_1484873581000", "previous_sibling": "node_5_1484873558461", "context": null, "output": {}, "conditions": "@receiptType:text", "metadata": null}, {"next_step": {"dialog_node": "node_9_1484873676555", "behavior": "jump_to", "selector": "body"}, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_3_1484873466720", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_5_1484873558461", "previous_sibling": null, "context": null, "output": {}, "conditions": "@receiptType:email", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_3_1484873466720", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_8_1484873633240", "previous_sibling": "node_7_1484873599050", "context": null, "output": {"text": {"values": ["Gracias por utilizar nuestros servicios. \u00bfEn qu\u00e9 m\u00e1s puedo ayudarle?"], "selection_policy": "sequential"}}, "conditions": "@negative:No", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_3_1484873466720", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_7_1484873599050", "previous_sibling": "node_6_1484873581000", "context": null, "output": {"text": {"values": ["\u00bfEn qu\u00e9 formato?"]}, "inputvalidation": {"oneOf": ["Correo electr\u00f3nico", "Texto"]}, "layout": {"name": "choose"}}, "conditions": "@affirmative:Yes", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_7_1484873599050", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_9_1484873676555", "previous_sibling": null, "context": null, "output": {"action": {"args": {"receipt_type": "email"}, "name": "sendPaymentReceipt"}}, "conditions": "@receiptType:email", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_7_1484873599050", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_10_1484873705284", "previous_sibling": "node_9_1484873676555", "context": {"request": {"entities": ["receiptType"], "name": "entitiesFilter"}}, "output": {"action": {"args": {"receipt_type": "text"}, "name": "sendPaymentReceipt"}}, "conditions": "@receiptType:text", "metadata": null}, {"next_step": null, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_9_1484873676555", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_12_1484873798168", "previous_sibling": "node_1_1491319944387", "context": null, "output": {"text": {"values": ["Se ha producido un error al enviar su recibo. Por favor, escriba 'agent' para hablar con un agente humano."], "selection_policy": "sequential"}}, "conditions": "@negative:Failure", "metadata": null}, {"next_step": {"dialog_node": "node_8_1484873633240", "behavior": "jump_to", "selector": "body"}, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_9_1484873676555", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_1_1491319944387", "previous_sibling": null, "context": null, "output": {"text": {"values": ["Su recibo ha sido enviado a la direcci\u00f3n de correo electr\u00f3nico que figura en nuestros archivos."], "selection_policy": "sequential"}}, "conditions": "@affirmative:Success", "metadata": null}, {"next_step": {"dialog_node": "node_12_1484873798168", "behavior": "jump_to", "selector": "body"}, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_10_1484873705284", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_14_1484873828744", "previous_sibling": "node_13_1484873809042", "context": null, "output": {"text": {"values": ["Se ha producido un error al enviar su recibo. Por favor, escriba 'agent' para hablar con un agente humano."], "selection_policy": "sequential"}}, "conditions": "@negative:Failure", "metadata": null}, {"next_step": {"dialog_node": "node_8_1484873633240", "behavior": "jump_to", "selector": "body"}, "updated": "2017-06-21T20:27:14.215000", "description": null, "parent": "node_10_1484873705284", "created": "2017-06-21T20:27:14.215000", "title": null, "dialog_node": "node_13_1484873809042", "previous_sibling": null, "context": null, "output": {"text": {"values": ["Su recibo ha sido enviado como texto al n\u00famero de tel\u00e9fono que figura en nuestros archivos."], "selection_policy": "sequential"}}, "conditions": "@affirmative:Success", "metadata": null}, {"updated": "2017-09-22T14:24:440Z", "description": null, "parent": null, "created": "2017-09-22T14:24:440Z", "dialog_node": "anything_else_telco_es", "previous_sibling": "node_27_1470877294668", "context": null, "output": {"text": "No puedo trabajar en eso ahora. Por favor, vuelva a intentarlo m\u00e1s tarde."}, "go_to": null, "conditions": "anything_else", "metadata": null}], "intents": [], "description": "dialogs: telco.es.2017-09-22T14:23:130Z", "name": "telco_es_2017-09-22T14:23:130Z_dialogs", "language": "es", "created": "2017-09-22T14:23:130Z", "modified": "2017-09-22T14:23:130Z", "entities": [{"values": [{"synonyms": ["correo"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "mailing", "created": "2017-09-22T14:23:130Z"}, {"synonyms": ["facturaci\u00f3n"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "billing", "created": "2017-09-22T14:23:130Z"}], "entity": "addressType"}, {"values": [{"synonyms": ["m\u00ednimo"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "minimum", "created": "2017-09-22T14:23:130Z"}], "entity": "paymentQuestion"}, {"values": [{"synonyms": ["reemplazar", "cambiar", "cambiando", "editando", "sustituir", "actualizar", "n\u00famero de sustituci\u00f3n", "editar", "existente"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "replacing", "created": "2017-09-22T14:23:130Z"}, {"synonyms": ["crear", "creando", "reciente", "a\u00f1adir", "a\u00f1adiendo", "nuevo", "nuevo n\u00famero"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "new", "created": "2017-09-22T14:23:130Z"}, {"synonyms": ["primario", "n\u00famero principal", "principal"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "primary", "created": "2017-09-22T14:23:130Z"}, {"synonyms": ["n\u00famero secundario", "secundario"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "secondary", "created": "2017-09-22T14:23:130Z"}], "entity": "phoneNumberType"}, {"values": [{"synonyms": ["perfil", "notificaciones de perfil"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "profile", "created": "2017-09-22T14:23:130Z"}, {"synonyms": ["notificaciones de seguridad/uso", "seguridad"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "security", "created": "2017-09-22T14:23:130Z"}, {"synonyms": ["cuenta", "notificaciones de cuenta"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "account", "created": "2017-09-22T14:23:130Z"}, {"synonyms": ["todos", "todas las notificaciones"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "all", "created": "2017-09-22T14:23:130Z"}, {"synonyms": ["notificaciones de facturaci\u00f3n electr\u00f3nica", "facturaci\u00f3n", "facturaci\u00f3n electr\u00f3nica"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "billing", "created": "2017-09-22T14:23:130Z"}], "entity": "emailType"}, {"values": [{"synonyms": ["cancel", "cancelado", "cancelar"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "Cancel", "created": "2017-09-22T14:23:130Z"}, {"synonyms": ["failure", "v\u00e1lido", "fallido", "error", "no"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "Failure", "created": "2017-09-22T14:23:130Z"}, {"synonyms": ["no"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "No", "created": "2017-09-22T14:23:130Z"}], "entity": "negative"}, {"values": [{"synonyms": ["s\u00ed"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "Yes", "created": "2017-09-22T14:23:130Z"}, {"synonyms": ["acuerdo", "de"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "Ok", "created": "2017-09-22T14:23:130Z"}, {"synonyms": ["correcto", "v\u00e1lido", "\u00e9xito", "success"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "Success", "created": "2017-09-22T14:23:130Z"}, {"synonyms": ["estupendo", "fenomenal", "fabuloso"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "Cool", "created": "2017-09-22T14:23:130Z"}], "entity": "affirmative"}, {"values": [{"synonyms": ["posponer", "aplazar", "diferir"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "defer", "created": "2017-09-22T14:23:130Z"}, {"synonyms": ["repetido", "recurrente", "autom\u00e1tico", "pago"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "autopay", "created": "2017-09-22T14:23:130Z"}, {"synonyms": ["pagar", "pagarlo", "ahora", "completo", "pagar ahora", "total"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "now", "created": "2017-09-22T14:23:130Z"}, {"synonyms": ["cuotas", "cuota", "parcialmente", "plazos", "parcial"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "installment", "created": "2017-09-22T14:23:130Z"}], "entity": "paymentType"}, {"values": [{"synonyms": ["real", "latlong", "ubicaci\u00f3n actual", "gps"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "latlong", "created": "2017-09-22T14:23:130Z"}, {"synonyms": ["c\u00f3digo postal"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "zipcode", "created": "2017-09-22T14:23:130Z"}], "entity": "locationType"}, {"values": [{"synonyms": ["mensaje", "sms", "texto"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "text", "created": "2017-09-22T14:23:130Z"}, {"synonyms": ["correo electr\u00f3nico", "texto"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "email", "created": "2017-09-22T14:23:130Z"}], "entity": "receiptType"}, {"values": [{"synonyms": ["paypal"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "paypal", "created": "2017-09-22T14:23:130Z"}, {"synonyms": ["transferencia_directa"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "direct_transfer", "created": "2017-09-22T14:23:130Z"}, {"synonyms": ["tarjeta", "tarjeta de cr\u00e9dito", "visa", "mastercard", "tarjeta_cr\u00e9dito"], "metadata": null, "updated": "2017-09-22T14:23:130Z", "value": "credit_card", "created": "2017-09-22T14:23:130Z"}], "entity": "paymentMethod"}], "metadata": null}
+{
+    "counterexamples": [],
+    "created": "2017-10-29T20:02:43.575Z",
+    "description": "Generated dialog workspace in es for telco at 2017-06-28T22:42:530Z",
+    "dialog_nodes": [
+        {
+            "conditions": "$phone_number_input_counter == 1",
+            "context": {
+                "request": {
+                    "name": "escalateToAgent"
+                }
+            },
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_14_1471459912216",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "action": {
+                    "name": "agent"
+                },
+                "text": "Lo lamento mucho. Perm\u00edtame conectarle con un agente que puede ayudarle con su $phone_number_type number."
+            },
+            "parent": "node_12_1471459865961",
+            "previous_sibling": "node_13_1471459894124",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "$phone_number_input_counter == 0",
+            "context": {
+                "phone_number_input_counter": 1
+            },
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_13_1471459894124",
+            "go_to": {
+                "dialog_node": "node_10_1471459819238",
+                "return": null,
+                "selector": "body"
+            },
+            "metadata": null,
+            "output": {
+                "layout": {
+                    "repopulate": true
+                },
+                "text": {
+                    "values": [
+                        "Lo siento, pero este n\u00famero telef\u00f3nico no es v\u00e1lido. Por favor, intente nuevamente."
+                    ]
+                }
+            },
+            "parent": "node_12_1471459865961",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "$email_input_counter == 1",
+            "context": {
+                "request": {
+                    "name": "escalateToAgent"
+                }
+            },
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_12_1471537474123",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "action": {
+                    "name": "agent"
+                },
+                "text": "Lo lamento mucho. Perm\u00edtame conectarle con un agente que puede ayudarle a actualizar su $email_type email."
+            },
+            "parent": "node_9_1471537179473",
+            "previous_sibling": "node_11_1471537462556",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "$email_input_counter == 0",
+            "context": {
+                "email_input_counter": 1
+            },
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_11_1471537462556",
+            "go_to": {
+                "dialog_node": "node_7_1471536802114",
+                "return": null,
+                "selector": "body"
+            },
+            "metadata": null,
+            "output": {
+                "layout": {
+                    "repopulate": true
+                },
+                "text": {
+                    "values": [
+                        "Lo siento, pero este correo electr\u00f3nico no es v\u00e1lido. Por favor, intente nuevamente."
+                    ]
+                }
+            },
+            "parent": "node_9_1471537179473",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@paymentMethod:paypal",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_54_1470888108729",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "text": {
+                    "values": [
+                        "No admitimos los pagos por Paypal todav\u00eda. Favor de intentar luego. \u00bfNecesita ayuda con algo m\u00e1s?"
+                    ]
+                }
+            },
+            "parent": "node_47_1470887918931",
+            "previous_sibling": "node_53_1470888094828",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@paymentQuestion:m\u00ednimo",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_1_1470889354198",
+            "go_to": {
+                "dialog_node": "node_47_1470887918931",
+                "return": null,
+                "selector": "body"
+            },
+            "metadata": null,
+            "output": {
+                "text": {
+                    "values": [
+                        "El pago m\u00ednimo que puede realizar es \\$10."
+                    ]
+                }
+            },
+            "parent": "node_47_1470887918931",
+            "previous_sibling": "node_54_1470888108729",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@paymentMethod:(transferencia directa)",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_53_1470888094828",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "text": {
+                    "values": [
+                        "No admitimos los pagos por transferencia bancaria todav\u00eda. Favor de intentar luego. \u00bfNecesita ayuda con algo m\u00e1s?"
+                    ]
+                }
+            },
+            "parent": "node_47_1470887918931",
+            "previous_sibling": "node_52_1470888040343",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@paymentMethod:tarjeta_de_cr\u00e9dito",
+            "context": {
+                "request": {
+                    "name": "getPaymentMethods"
+                }
+            },
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_52_1470888040343",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "layout": {
+                    "name": "cc-validator"
+                },
+                "store": [
+                    {
+                        "label": "Nombre en la tarjeta",
+                        "name": "cc_full_name"
+                    },
+                    {
+                        "label": "N\u00famero de tarjeta cr\u00e9dito",
+                        "name": "cc_number"
+                    },
+                    {
+                        "label": "Fecha de vencimiento",
+                        "name": "cc_exp_date"
+                    },
+                    {
+                        "label": "C\u00f3digo de seguridad",
+                        "name": "cc_code"
+                    }
+                ],
+                "text": {
+                    "values": [
+                        "Por favor, pague con su tarjeta."
+                    ]
+                }
+            },
+            "parent": "node_47_1470887918931",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@locationType:(latitud y longitud)",
+            "context": {
+                "location_type": "latlong",
+                "request": {
+                    "entities": [
+                        "locationType"
+                    ],
+                    "name": "entitiesFilter"
+                }
+            },
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_42_1470880617082",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "inputvalidation": {
+                    "typeOf": "latlong"
+                },
+                "layout": {
+                    "name": "request-geolocation-latlong"
+                },
+                "text": {
+                    "values": [
+                        "Ahora vamos a buscar las tiendas cercanas. El sitio web necesita permiso para acceder a su ubicaci\u00f3n. Por favor, permita o bloquee esta acci\u00f3n para que sigamos."
+                    ]
+                }
+            },
+            "parent": "node_16_1470877005528",
+            "previous_sibling": "node_41_1470880607742",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@locationType:(c\u00f3digo postal)",
+            "context": {
+                "location_type": "zipcode"
+            },
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_41_1470880607742",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "inputvalidation": {
+                    "typeOf": "zipcode"
+                },
+                "layout": {
+                    "name": "request-geolocation-zipcode"
+                },
+                "text": {
+                    "values": [
+                        "Ahora vamos a buscar las tiendas cercanas. Por favor, escriba su c\u00f3digo postal para que sigamos."
+                    ]
+                }
+            },
+            "parent": "node_16_1470877005528",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@affirmative:S\u00ed",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_7_1484873599050",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "inputvalidation": {
+                    "oneOf": [
+                        "Correo electr\u00f3nico",
+                        "Texto"
+                    ]
+                },
+                "layout": {
+                    "name": "choose"
+                },
+                "text": {
+                    "values": [
+                        "\u00bfQu\u00e9 formato?"
+                    ]
+                }
+            },
+            "parent": "node_3_1484873466720",
+            "previous_sibling": "node_6_1484873581000",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@negative:No",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_8_1484873633240",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "text": {
+                    "selection_policy": "sequential",
+                    "values": [
+                        "Gracias por su pago. \u00bfNecesita ayuda con algo m\u00e1s?"
+                    ]
+                }
+            },
+            "parent": "node_3_1484873466720",
+            "previous_sibling": "node_7_1484873599050",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@receiptType:(mensaje de texto)",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_6_1484873581000",
+            "go_to": {
+                "dialog_node": "node_10_1484873705284",
+                "return": null,
+                "selector": "body"
+            },
+            "metadata": null,
+            "output": {},
+            "parent": "node_3_1484873466720",
+            "previous_sibling": "node_5_1484873558461",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@receiptType:email",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_5_1484873558461",
+            "go_to": {
+                "dialog_node": "node_9_1484873676555",
+                "return": null,
+                "selector": "body"
+            },
+            "metadata": null,
+            "output": {},
+            "parent": "node_3_1484873466720",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "true",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_10_1471459819238",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "layout": {
+                    "name": "form"
+                },
+                "store": [
+                    {
+                        "label": "Escriba nuevo n\u00famero",
+                        "name": "user_phone_number",
+                        "required": "true"
+                    }
+                ],
+                "text": {
+                    "values": [
+                        "\u00bfA qu\u00e9 n\u00famero le gustar\u00eda cambiar?"
+                    ]
+                }
+            },
+            "parent": "node_9_1471459507985",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@affirmative:Success",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_10_1471537394095",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "text": [
+                    "Su correo electr\u00f3nico se ha actualizado de $email_type a |&user_email_address|.",
+                    "\u00bfNecesita ayuda con algo m\u00e1s?"
+                ],
+                "variables": "true"
+            },
+            "parent": "node_8_1471537170271",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "true",
+            "context": {
+                "request": {
+                    "args": {
+                        "location": "$user_location",
+                        "location-type": "$location_type"
+                    },
+                    "name": "getStoreList"
+                }
+            },
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_2_1474068005548",
+            "go_to": {
+                "dialog_node": "node_3_1474068014471",
+                "return": null,
+                "selector": "body"
+            },
+            "metadata": null,
+            "output": {
+                "layout": {
+                    "index": "0",
+                    "name": "show-locations"
+                },
+                "text": "Elija una tienda"
+            },
+            "parent": "node_6_1473785203250",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "true",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_1_1471443473959",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "layout": {
+                    "name": "form"
+                },
+                "store": [
+                    {
+                        "label": "calle/plaza/avenida",
+                        "name": "user_street_address1",
+                        "required": "true"
+                    },
+                    {
+                        "label": "edificio y piso",
+                        "name": "user_street_address2"
+                    },
+                    {
+                        "label": "ciudad/barrio",
+                        "name": "user_locality",
+                        "required": "true"
+                    },
+                    {
+                        "label": "Provincia",
+                        "name": "user_state_or_province",
+                        "required": "true"
+                    },
+                    {
+                        "label": "C\u00f3digo postal",
+                        "name": "user_zipcode",
+                        "required": "true"
+                    }
+                ],
+                "text": {
+                    "values": [
+                        "Escriba la nueva direcci\u00f3n, por favor"
+                    ]
+                }
+            },
+            "parent": "node_8_1471362769868",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "true",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_1_1473980049883",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "text": "\u00bfNecesita ayuda con algo m\u00e1s?"
+            },
+            "parent": "node_1_1473203398776",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "true",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_17_1471460652194",
+            "go_to": {
+                "dialog_node": "node_11_1471459850072",
+                "return": null,
+                "selector": "user_input"
+            },
+            "metadata": null,
+            "output": {
+                "layout": {
+                    "name": "form"
+                },
+                "store": [
+                    {
+                        "label": "Escriba un nuevo n\u00famero telef\u00f3nico",
+                        "name": "user_phone_number",
+                        "required": "true"
+                    }
+                ],
+                "text": {
+                    "values": [
+                        "Por favor introduzc el n\u00famero telef\u00f3nico que quiere usar como su $phone_number_type?"
+                    ]
+                }
+            },
+            "parent": "node_16_1471460506727",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@phoneNumberType:primario || @phoneNumberType:secundario",
+            "context": {
+                "phone_number_type": "<? input.text ?>"
+            },
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_9_1471459507985",
+            "go_to": {
+                "dialog_node": "node_10_1471459819238",
+                "return": null,
+                "selector": "body"
+            },
+            "metadata": null,
+            "output": {},
+            "parent": "node_7_1471450181921",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@phoneNumberType:reemplazando",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_7_1471450181921",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "inputvalidation": {
+                    "oneOf": [
+                        "Primario",
+                        "Secundario"
+                    ]
+                },
+                "layout": {
+                    "name": "choose"
+                },
+                "text": {
+                    "values": [
+                        "Qu\u00e9 n\u00famero telef\u00f3nico?"
+                    ]
+                }
+            },
+            "parent": "node_12_1498110561929",
+            "previous_sibling": "node_6_1471450167841",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@phoneNumberType:nuevo",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_6_1471450167841",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "inputvalidation": {
+                    "oneOf": [
+                        "Primario",
+                        "Secundario"
+                    ]
+                },
+                "layout": {
+                    "name": "choose"
+                },
+                "text": {
+                    "values": [
+                        "\u00bfQuiere que este n\u00famero sea el principal o el alternativo?"
+                    ]
+                }
+            },
+            "parent": "node_12_1498110561929",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@paymentType:cuota",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_48_1470887962383",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "text": {
+                    "values": [
+                        "No admitimos el pago en cuotas todav\u00eda. Favor de intentar luego. \u00bfNecesita ayuda con algo m\u00e1s?"
+                    ]
+                }
+            },
+            "parent": "node_11_1473794714118",
+            "previous_sibling": "node_47_1470887918931",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@paymentType:autopago",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_49_1470887982532",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "text": {
+                    "values": [
+                        "No admitimos los autopagos todav\u00eda. Favor de intentar luego. \u00bfNecesita ayuda con algo m\u00e1s?"
+                    ]
+                }
+            },
+            "parent": "node_11_1473794714118",
+            "previous_sibling": "node_48_1470887962383",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@paymentQuestion:m\u00ednimo",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_51_1470888011033",
+            "go_to": {
+                "dialog_node": "node_11_1473794714118",
+                "return": null,
+                "selector": "body"
+            },
+            "metadata": null,
+            "output": {
+                "text": {
+                    "values": [
+                        "El pago m\u00ednimo que puede realizar es \\$10."
+                    ]
+                }
+            },
+            "parent": "node_11_1473794714118",
+            "previous_sibling": "node_50_1470887991668",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@paymentType:diferir",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_50_1470887991668",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "text": {
+                    "values": [
+                        "No admitimos diferir los pagos todav\u00eda. Favor de intentar luego. \u00bfNecesita ayuda con algo m\u00e1s?"
+                    ]
+                }
+            },
+            "parent": "node_11_1473794714118",
+            "previous_sibling": "node_49_1470887982532",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@paymentType:ahora",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_47_1470887918931",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "inputvalidation": {
+                    "oneOf": [
+                        "tarjeta_de_cr\u00e9dito"
+                    ]
+                },
+                "layout": {
+                    "name": "choose"
+                },
+                "text": {
+                    "values": [
+                        "\u00bfC\u00f3mo le gustar\u00eda pagar? (\u00a1M\u00e1s opciones vienen pronto!)."
+                    ]
+                }
+            },
+            "parent": "node_11_1473794714118",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@negative:Failure",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_13_1498111018681",
+            "go_to": {
+                "dialog_node": "node_41_1470880607742",
+                "return": null,
+                "selector": "user_input"
+            },
+            "metadata": null,
+            "output": {
+                "inputvalidation": {
+                    "oneOf": [
+                        "C\u00f3digo postal",
+                        "Latitud y longitud"
+                    ]
+                },
+                "layout": {
+                    "latlongIdx": 1,
+                    "name": "choose-location-type"
+                },
+                "text": {
+                    "values": [
+                        "Le pido que elija c\u00f3mo va a proveer su ubicaci\u00f3n"
+                    ]
+                }
+            },
+            "parent": "node_42_1470880617082",
+            "previous_sibling": "node_6_1473785203250",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "input.text.matches(\"^(\\-?\\d+(\\.\\d+)?),\\s*(\\-?\\d+(\\.\\d+)?)$\")",
+            "context": {
+                "user_location": "<? input.text ?>"
+            },
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_6_1473785203250",
+            "go_to": {
+                "dialog_node": "node_2_1474068005548",
+                "return": null,
+                "selector": "body"
+            },
+            "metadata": null,
+            "output": {},
+            "parent": "node_42_1470880617082",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "true",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_3_1474068014471",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "text": "\u00bfNecesita ayuda con algo m\u00e1s?"
+            },
+            "parent": "node_2_1474068005548",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@negative:Failure",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_4_1484873501713",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "text": {
+                    "selection_policy": "sequential",
+                    "values": [
+                        "Hubo un error durante el procesamiento de su pago. Por favor, vuelva a intentarlo."
+                    ]
+                }
+            },
+            "parent": "node_2_1484873440747",
+            "previous_sibling": "node_3_1484873466720",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@affirmative:Success",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_3_1484873466720",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "inputvalidation": {
+                    "oneOf": [
+                        "S\u00ed",
+                        "No"
+                    ]
+                },
+                "layout": {
+                    "name": "confirm"
+                },
+                "text": {
+                    "values": [
+                        "Gracias por su pago. \u00bfLe gustar\u00eda un recibo por esta transacci\u00f3n?"
+                    ]
+                }
+            },
+            "parent": "node_2_1484873440747",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@negative:No",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_4_1471443583168",
+            "go_to": {
+                "dialog_node": "node_1_1471445215649",
+                "return": null,
+                "selector": "condition"
+            },
+            "metadata": null,
+            "output": {},
+            "parent": "node_2_1471443542657",
+            "previous_sibling": "node_3_1471443577233",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@affirmative:S\u00ed",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_3_1471443577233",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "action": {
+                    "args": {
+                        "address_type": "$address_type"
+                    },
+                    "name": "updateAddress"
+                }
+            },
+            "parent": "node_2_1471443542657",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@addressType:facturaci\u00f3n || @addressType:env\u00edo",
+            "context": {
+                "address_type": "<? input.text ?>"
+            },
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_8_1471362769868",
+            "go_to": {
+                "dialog_node": "node_1_1471443473959",
+                "return": null,
+                "selector": "body"
+            },
+            "metadata": null,
+            "output": {},
+            "parent": "node_4_1470844889583",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@phoneNumberType:primario || @phoneNumberType:secundario",
+            "context": {
+                "phone_number_type": "<? input.text ?>"
+            },
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_16_1471460506727",
+            "go_to": {
+                "dialog_node": "node_17_1471460652194",
+                "return": null,
+                "selector": "body"
+            },
+            "metadata": null,
+            "output": {},
+            "parent": "node_6_1471450167841",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@emailType",
+            "context": {
+                "email_type": "<? input.text ?>"
+            },
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_2_1471535980478",
+            "go_to": {
+                "dialog_node": "node_7_1471536802114",
+                "return": null,
+                "selector": "body"
+            },
+            "metadata": null,
+            "output": {},
+            "parent": "node_2_1470928876329",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "true",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_7_1471536802114",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "layout": {
+                    "name": "form"
+                },
+                "store": [
+                    {
+                        "label": "Escriba el nuevo correo electr\u00f3nico",
+                        "name": "user_email_address",
+                        "required": "true"
+                    }
+                ],
+                "text": "Ha elegido $email_type. \u00bfQu\u00e9 correo electr\u00f3nico le gustar\u00eda usar?"
+            },
+            "parent": "node_2_1471535980478",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@negative:Failure",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_12_1484873798168",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "text": {
+                    "selection_policy": "sequential",
+                    "values": [
+                        "Hubo un error mientras se enviaba su recibo. Escriba 'agente' para conectar con un agente humano."
+                    ]
+                }
+            },
+            "parent": "node_9_1484873676555",
+            "previous_sibling": "node_11_1484873771169",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@affirmative:Success",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_11_1484873771169",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "text": {
+                    "selection_policy": "sequential",
+                    "values": [
+                        "Se enviar\u00e1 el recibo del pago a su correo electr\u00f3nico que tenemos en nuestro archivo."
+                    ]
+                }
+            },
+            "parent": "node_9_1484873676555",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@receiptType:(mensaje de texto)",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_10_1484873705284",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "action": {
+                    "args": {
+                        "receipt_type": "text"
+                    },
+                    "name": "sendPaymentReceipt"
+                }
+            },
+            "parent": "node_7_1484873599050",
+            "previous_sibling": "node_9_1484873676555",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@receiptType:email",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_9_1484873676555",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "action": {
+                    "args": {
+                        "receipt_type": "email"
+                    },
+                    "name": "sendPaymentReceipt"
+                }
+            },
+            "parent": "node_7_1484873599050",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@affirmative:Success",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_11_1473794714118",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "inputvalidation": {
+                    "oneOf": [
+                        "Pagar ahora"
+                    ]
+                },
+                "layout": {
+                    "name": "choose"
+                },
+                "text": {
+                    "values": [
+                        "Su saldo de cuenta es \\$|&bill_amount| se vence el |&payment_due_date|. \u00bfQu\u00e9 le gustar\u00eda hacer? (\u00a1M\u00e1s opciones vienen pronto!)"
+                    ]
+                },
+                "variables": "true"
+            },
+            "parent": "node_27_1470877294668",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@negative:Failure",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_9_1471537179473",
+            "go_to": {
+                "dialog_node": "node_11_1471537462556",
+                "return": null,
+                "selector": "condition"
+            },
+            "metadata": null,
+            "output": {},
+            "parent": "node_7_1471536802114",
+            "previous_sibling": "node_8_1471537170271",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@affirmative:Success",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_8_1471537170271",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "action": {
+                    "args": {
+                        "email_type": "$email_type"
+                    },
+                    "name": "updateEmail"
+                }
+            },
+            "parent": "node_7_1471536802114",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "$address_input_counter == 1",
+            "context": {
+                "request": {
+                    "name": "escalateToAgent"
+                }
+            },
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_2_1471445320802",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "action": {
+                    "name": "agent"
+                },
+                "text": "Lo lamento mucho. Perm\u00edtame conectarle con un agente que puede ayudarle a actualizar su $address_type address."
+            },
+            "parent": "node_4_1471443583168",
+            "previous_sibling": "node_1_1471445215649",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "$address_input_counter == 0",
+            "context": {
+                "address_input_counter": 1
+            },
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_1_1471445215649",
+            "go_to": {
+                "dialog_node": "node_1_1471443473959",
+                "return": null,
+                "selector": "body"
+            },
+            "metadata": null,
+            "output": {
+                "layout": {
+                    "repopulate": true
+                }
+            },
+            "parent": "node_4_1471443583168",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@negative:No",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_58_1470888307093",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "text": "\u00bfNecesita ayuda con algo m\u00e1s?"
+            },
+            "parent": "node_55_1470888191473",
+            "previous_sibling": "node_2_1484873440747",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@affirmative:S\u00ed",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_2_1484873440747",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "action": {
+                    "args": {
+                        "payment_method": "$payment_method"
+                    },
+                    "name": "payBill"
+                },
+                "text": {
+                    "values": [
+                        "Procesando su pago..."
+                    ]
+                }
+            },
+            "parent": "node_55_1470888191473",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "input.text == 'cancel' || input.text == 'Cancel'",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_2_1498678294966",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "text": {
+                    "selection_policy": "sequential",
+                    "values": [
+                        "Tu solicitud ha sido cancelada \u00bfNecesita ayuda con algo m\u00e1s?"
+                    ]
+                }
+            },
+            "parent": "node_52_1470888040343",
+            "previous_sibling": "node_56_1470888201581",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@negative:Failure",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_56_1470888201581",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "text": "Hubo un error durante el procesamiento de los detalles de su tarjeta de cr\u00e9dito. \u00bfNecesita ayuda con algo m\u00e1s?"
+            },
+            "parent": "node_52_1470888040343",
+            "previous_sibling": "node_55_1470888191473",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@affirmative:Success",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_55_1470888191473",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "inputvalidation": {
+                    "oneOf": [
+                        "S\u00ed",
+                        "No"
+                    ]
+                },
+                "layout": {
+                    "name": "confirm"
+                },
+                "text": {
+                    "values": [
+                        "Usted va a pagar \\$|&bill_amount| con su tarjeta XXXXXXXXXXXX|&cc_last_four_digits|."
+                    ]
+                },
+                "variables": "true"
+            },
+            "parent": "node_52_1470888040343",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@negative:Failure",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_14_1484873828744",
+            "go_to": {
+                "dialog_node": "node_12_1484873798168",
+                "return": null,
+                "selector": "body"
+            },
+            "metadata": null,
+            "output": {},
+            "parent": "node_10_1484873705284",
+            "previous_sibling": "node_13_1484873809042",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@affirmative:Success",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_13_1484873809042",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "text": {
+                    "selection_policy": "sequential",
+                    "values": [
+                        "Se enviar\u00e1 el recibo de pago a su n\u00famero telef\u00f3nico que tenemos en nuestro archivo como un mensaje."
+                    ]
+                }
+            },
+            "parent": "node_10_1484873705284",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@negative:Failure",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_12_1471459865961",
+            "go_to": {
+                "dialog_node": "node_13_1471459894124",
+                "return": null,
+                "selector": "condition"
+            },
+            "metadata": null,
+            "output": {},
+            "parent": "node_10_1471459819238",
+            "previous_sibling": "node_11_1471459850072",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@affirmative:Success",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_11_1471459850072",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "action": {
+                    "args": {
+                        "phone_number_type": "$phone_number_type"
+                    },
+                    "name": "updatePhoneNumber"
+                }
+            },
+            "parent": "node_10_1471459819238",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "true",
+            "context": {
+                "user_location": "<? input.text ?>"
+            },
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_44_1470880674112",
+            "go_to": {
+                "dialog_node": "node_1_1473203398776",
+                "return": null,
+                "selector": "body"
+            },
+            "metadata": null,
+            "output": {},
+            "parent": "node_41_1470880607742",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "true",
+            "context": {
+                "request": {
+                    "args": {
+                        "location": "$user_location",
+                        "location-type": "$location_type"
+                    },
+                    "name": "getStoreList"
+                }
+            },
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_1_1473203398776",
+            "go_to": {
+                "dialog_node": "node_1_1473980049883",
+                "return": null,
+                "selector": "body"
+            },
+            "metadata": null,
+            "output": {
+                "layout": {
+                    "index": "0",
+                    "name": "show-locations"
+                },
+                "text": "Elija una tienda"
+            },
+            "parent": "node_44_1470880674112",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@affirmative:Success",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_15_1471459970243",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "text": [
+                    "Su $phone_number_type se ha actualizado a |&user_phone_number|.",
+                    "\u00bfNecesita ayuda con algo m\u00e1s?"
+                ],
+                "variables": "true"
+            },
+            "parent": "node_11_1471459850072",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@affirmative:Success",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_5_1471443635934",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "text": "Su $address_type direcci\u00f3n se ha actualizado. \u00bfNecesita ayuda con algo m\u00e1s?"
+            },
+            "parent": "node_3_1471443577233",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@negative:Failure",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_6_1471443663472",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "text": "Lo lamentamos mucho. Hubo un error durante el procesamiento de esta direcci\u00f3n. \u00bfNecesita ayuda con algo m\u00e1s?"
+            },
+            "parent": "node_1_1471443473959",
+            "previous_sibling": "node_2_1471443542657",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "@affirmative:Success",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_2_1471443542657",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "inputvalidation": {
+                    "oneOf": [
+                        "S\u00ed",
+                        "No"
+                    ]
+                },
+                "layout": {
+                    "name": "confirm"
+                },
+                "text": [
+                    "\u00bfLa informaci\u00f3n introducida es correcta?",
+                    "|&user_street_address1|",
+                    "|&user_street_address2|",
+                    "|&user_locality|, |&user_state_or_province| |&user_zipcode|"
+                ],
+                "variables": "true"
+            },
+            "parent": "node_1_1471443473959",
+            "previous_sibling": null,
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "#Help-Connect_to_Agent",
+            "context": {
+                "request": {
+                    "name": "escalateToAgent"
+                }
+            },
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_13_1470876887599",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "action": {
+                    "name": "agent"
+                },
+                "node_position": "root",
+                "text": {
+                    "values": [
+                        "No hay problema, puedo conectarle con un agente."
+                    ]
+                }
+            },
+            "parent": null,
+            "previous_sibling": "node_22_1470877185121",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "#Payment-Make_A_Payment",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_27_1470877294668",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "action": {
+                    "args": {
+                        "variables": [
+                            "bill_amount",
+                            "payment_due_date"
+                        ]
+                    },
+                    "name": "getUserProfileVariables"
+                },
+                "node_position": "root",
+                "text": {
+                    "values": [
+                        "Accediendo a su informaci\u00f3n de cuenta..."
+                    ]
+                }
+            },
+            "parent": null,
+            "previous_sibling": "conversation_start_telco_es",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "#Information-Store_Hours",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_20_1470877179962",
+            "go_to": {
+                "dialog_node": "node_16_1470877005528",
+                "return": null,
+                "selector": "body"
+            },
+            "metadata": null,
+            "output": {
+                "text": {
+                    "values": [
+                        "Claro, puedo ayudarle a encontrar el horario de tienda. Primero, vamos a buscar las tiendas cercanas."
+                    ]
+                }
+            },
+            "parent": null,
+            "previous_sibling": "node_16_1470877005528",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "#Information-Store_Phone_Number",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_22_1470877185121",
+            "go_to": {
+                "dialog_node": "node_16_1470877005528",
+                "return": null,
+                "selector": "body"
+            },
+            "metadata": null,
+            "output": {
+                "text": {
+                    "values": [
+                        "Por Supuesto, puedo ayudarle a encontrar el n\u00famero telef\u00f3nico de su tienda. Primero, vamos a buscar las tiendas cercanas."
+                    ]
+                }
+            },
+            "parent": null,
+            "previous_sibling": "node_21_1470877182242",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "#Information-Find_Nearest_Store",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_16_1470877005528",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "inputvalidation": {
+                    "oneOf": [
+                        "C\u00f3digo postal",
+                        "Ubicaci\u00f3n actual"
+                    ]
+                },
+                "layout": {
+                    "latlongIdx": 1,
+                    "name": "choose-location-type"
+                },
+                "node_position": "root",
+                "text": {
+                    "values": [
+                        "Antes de buscar una tienda, le pido que elija c\u00f3mo va a proveer su ubicaci\u00f3n."
+                    ]
+                }
+            },
+            "parent": null,
+            "previous_sibling": "node_12_1498110561929",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "anything_else",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "anything_else_telco_es",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "text": "No puedo trabajar en eso ahora. Por favor, vuelva a intentarlo m\\u00e1s tarde."
+            },
+            "parent": null,
+            "previous_sibling": "node_13_1470876887599",
+            "title": "anything_else_telco_es",
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "#Account_Management-Update_Change_Contact_Phone_Number",
+            "context": {
+                "phone_number_input_counter": 0
+            },
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_12_1498110561929",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "inputvalidation": {
+                    "oneOf": [
+                        "Nuevo",
+                        "Reemplazando"
+                    ]
+                },
+                "layout": {
+                    "name": "choose"
+                },
+                "node_position": "root",
+                "text": {
+                    "values": [
+                        "\u00bfEst\u00e1 a\u00f1adiendo un nuevo n\u00famero de contacto o sustituyendo al existente?"
+                    ]
+                }
+            },
+            "parent": null,
+            "previous_sibling": "node_4_1470844889583",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "#Account_Management-Update_Change_Address",
+            "context": {
+                "address_input_counter": 0
+            },
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_4_1470844889583",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "inputvalidation": {
+                    "oneOf": [
+                        "Facturaci\u00f3n",
+                        "Env\u00edo"
+                    ]
+                },
+                "layout": {
+                    "name": "choose"
+                },
+                "node_position": "root",
+                "text": {
+                    "values": [
+                        "\u00bfQu\u00e9 direcci\u00f3n le gustar\u00eda actualizar?"
+                    ]
+                }
+            },
+            "parent": null,
+            "previous_sibling": "node_2_1470928876329",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "#Information-Store_Location",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_21_1470877182242",
+            "go_to": {
+                "dialog_node": "node_16_1470877005528",
+                "return": null,
+                "selector": "body"
+            },
+            "metadata": null,
+            "output": {},
+            "parent": null,
+            "previous_sibling": "node_20_1470877179962",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "#Account_Management-Email_Change",
+            "context": {
+                "email_input_counter": 0
+            },
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "node_2_1470928876329",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "inputvalidation": {
+                    "oneOf": [
+                        "Perfil",
+                        "Cuenta",
+                        "Seguridad",
+                        "Facturaci\u00f3n",
+                        "Todos"
+                    ]
+                },
+                "layout": {
+                    "name": "choose"
+                },
+                "node_position": "root",
+                "text": {
+                    "values": [
+                        "\u00bfQu\u00e9 correo electr\u00f3nico le gustar\u00eda cambiar?"
+                    ]
+                }
+            },
+            "parent": null,
+            "previous_sibling": "node_27_1470877294668",
+            "title": null,
+            "updated": "2017-10-29T20:02:43.575Z"
+        },
+        {
+            "conditions": "conversation_start",
+            "context": null,
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "dialog_node": "conversation_start_telco_es",
+            "go_to": null,
+            "metadata": null,
+            "output": {
+                "text": "Hola, mi nombre es %agent_name%. %greeting_message%"
+            },
+            "parent": null,
+            "previous_sibling": null,
+            "title": "conversation_start_telco_es",
+            "updated": "2017-10-29T20:02:43.575Z"
+        }
+    ],
+    "entities": [
+        {
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "entity": "receiptType",
+            "open_list": null,
+            "source": null,
+            "type": null,
+            "updated": "2017-10-29T20:02:43.575Z",
+            "values": [
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "Email",
+                        "e-mail",
+                        "correo",
+                        "correo electr\u00f3nico"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "email"
+                },
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "mensaje",
+                        "Mensaje de texto",
+                        "Texto",
+                        "sms"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "mensaje de texto"
+                }
+            ]
+        },
+        {
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "entity": "paymentType",
+            "open_list": null,
+            "source": null,
+            "type": null,
+            "updated": "2017-10-29T20:02:43.575Z",
+            "values": [
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "posponer",
+                        "retrasar",
+                        "Diferir",
+                        "luego"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "diferir"
+                },
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "autom\u00e1tico",
+                        "auto pago",
+                        "pago autom\u00e1tico",
+                        "Autopago",
+                        "pago automatizado",
+                        "pago recurrente",
+                        "repetido"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "autopago"
+                },
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "entero",
+                        "s\u00e1ldalo",
+                        "total",
+                        "saldar",
+                        "completo",
+                        "Ahora",
+                        "ya"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "ahora"
+                },
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "parcialmente",
+                        "cuotas",
+                        "partes",
+                        "parciales",
+                        "Cuota",
+                        "plazo",
+                        "plazos"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "cuota"
+                }
+            ]
+        },
+        {
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "entity": "paymentMethod",
+            "open_list": null,
+            "source": null,
+            "type": null,
+            "updated": "2017-10-29T20:02:43.575Z",
+            "values": [
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "master card",
+                        "tarjeta",
+                        "visa",
+                        "tarjeta de cr\u00e9dito"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "tarjeta_de_cr\u00e9dito"
+                },
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "PayPal"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "paypal"
+                },
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "transferencia bancaria",
+                        "transferencia",
+                        "transferencia electr\u00f3nica"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "transferencia directa"
+                }
+            ]
+        },
+        {
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "entity": "paymentQuestion",
+            "open_list": null,
+            "source": null,
+            "type": null,
+            "updated": "2017-10-29T20:02:43.575Z",
+            "values": [
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "M\u00ednimo",
+                        "menos"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "m\u00ednimo"
+                }
+            ]
+        },
+        {
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "entity": "emailType",
+            "open_list": null,
+            "source": null,
+            "type": null,
+            "updated": "2017-10-29T20:02:43.575Z",
+            "values": [
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "Seguridad"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "seguridad"
+                },
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "Cuenta",
+                        "registro"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "cuenta"
+                },
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "Todos"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "todos"
+                },
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "facturaci\u00f3n electr\u00f3nica",
+                        "factura electr\u00f3nica",
+                        "Facturaci\u00f3n"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "facturaci\u00f3n"
+                },
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "Perfil"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "perfil"
+                }
+            ]
+        },
+        {
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "entity": "affirmative",
+            "open_list": null,
+            "source": null,
+            "type": null,
+            "updated": "2017-10-29T20:02:43.575Z",
+            "values": [
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "s\u00ed",
+                        "acierto",
+                        "v\u00e1lido",
+                        "correcto"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "\u00c9xito"
+                },
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "yep",
+                        "s\u00ed",
+                        "si",
+                        "sipi",
+                        "sim\u00f3n",
+                        "sip",
+                        "claro"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "S\u00ed"
+                },
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "correct",
+                        "valid",
+                        "success",
+                        "right"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "Success"
+                },
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "fabuloso",
+                        "excelente",
+                        "genial"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "Genial"
+                },
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "Va que va",
+                        "yast\u00e1s",
+                        "Sale",
+                        "OK",
+                        "Va"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "Ok"
+                }
+            ]
+        },
+        {
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "entity": "addressType",
+            "open_list": null,
+            "source": null,
+            "type": null,
+            "updated": "2017-10-29T20:02:43.575Z",
+            "values": [
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "Facturaci\u00f3n",
+                        "cobro"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "facturaci\u00f3n"
+                },
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "Env\u00edo",
+                        "contacto"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "env\u00edo"
+                }
+            ]
+        },
+        {
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "entity": "phoneNumberType",
+            "open_list": null,
+            "source": null,
+            "type": null,
+            "updated": "2017-10-29T20:02:43.575Z",
+            "values": [
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "complementario",
+                        "Secundario"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "secundario"
+                },
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "existente",
+                        "editar",
+                        "editando",
+                        "Reemplazando",
+                        "cambiando",
+                        "actualizando",
+                        "cambiar",
+                        "reemplazar"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "reemplazando"
+                },
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "principal",
+                        "Primario"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "primario"
+                },
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "agregar",
+                        "Nuevo",
+                        "incluir",
+                        "creando",
+                        "agregando",
+                        "crear"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "nuevo"
+                }
+            ]
+        },
+        {
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "entity": "negative",
+            "open_list": null,
+            "source": null,
+            "type": null,
+            "updated": "2017-10-29T20:02:43.575Z",
+            "values": [
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "nope",
+                        "nah",
+                        "na",
+                        "no",
+                        "nel"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "No"
+                },
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "incorrecto",
+                        "falla",
+                        "inv\u00e1lido",
+                        "fall\u00f3",
+                        "err\u00f3neo"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "Falla"
+                },
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "wrong",
+                        "failure",
+                        "invalid",
+                        "failed"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "Failure"
+                }
+            ]
+        },
+        {
+            "created": "2017-10-29T20:02:43.575Z",
+            "description": null,
+            "entity": "locationType",
+            "open_list": null,
+            "source": null,
+            "type": null,
+            "updated": "2017-10-29T20:02:43.575Z",
+            "values": [
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "zipcode"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "c\u00f3digo postal"
+                },
+                {
+                    "created": "2017-10-29T20:02:43.575Z",
+                    "metadata": null,
+                    "synonyms": [
+                        "GPS",
+                        "latlong",
+                        "coordenadas",
+                        "ubicaci\u00f3n actual",
+                        "posici\u00f3n actual"
+                    ],
+                    "type": "synonyms",
+                    "updated": "2017-10-29T20:02:43.575Z",
+                    "value": "latitud y longitud"
+                }
+            ]
+        }
+    ],
+    "intents": [],
+    "language": "es",
+    "learning_opt_out": true,
+    "metadata": {
+        "api_version": {
+            "major_version": "v1",
+            "minor_version": "2017-02-03"
+        }
+    },
+    "name": "telco_es_2017-06-28T22:42:530Z",
+    "status": "Available",
+    "updated": "2017-10-29T20:02:43.575Z",
+    "workspace_id": "71a3b86f-fba2-43a7-96a2-70b839f23623"
+}
